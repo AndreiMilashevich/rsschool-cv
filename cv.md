@@ -10,8 +10,8 @@
 
 ### Contact Info:
 * <milashevichandrei@gmail.com>
-* [https://linkedin.com/in/andrei-milashevich]
-* [https://github.com/AndreiMilashevich]
+* [https://linkedin.com/in/andrei-milashevich](https://linkedin.com/in/andrei-milashevich)
+* [https://github.com/AndreiMilashevich](https://github.com/AndreiMilashevich)
 
 Interested in becoming part of a friendly team where I can apply my skills, develop them and get a lot of experience.
 I like to get new knowledge in areas that are new to me.
