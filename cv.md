@@ -26,7 +26,7 @@ JavaScript, HTML5, CSS3, Git, Figma
 
 ### Education: 
 
-####Technical operator of manned aircraft and their power unit
+Technical operator of manned aircraft and their power unit
 Military Academy of Republic of Belarus
 2006 - 2011
 
