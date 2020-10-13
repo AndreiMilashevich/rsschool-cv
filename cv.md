@@ -19,10 +19,14 @@ I have good knowledge in quality assurance and interested in frontend developmen
 On my previous job I got a good knowledge of aviation technology and extensive experience in managing aviation technical units.
 
 
-### Skills: JavaScript, HTML5, CSS3, Git, Figma
+### Skills:
+
+JavaScript, HTML5, CSS3, Git, Figma
 
 
-### Education: Technical operator of manned aircraft and their power units
+### Education: 
+
+####Technical operator of manned aircraft and their power unit
 Military Academy of Republic of Belarus
 2006 - 2011
 
