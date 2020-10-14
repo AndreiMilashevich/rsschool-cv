@@ -1,1 +1,1 @@
- <https:\\github.com\AndreiMilashevich\rsschool-cv>
+ <https:\\github.com\AndreiMilashevich\rsschool-cv\cv>
