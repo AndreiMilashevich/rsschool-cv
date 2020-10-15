@@ -1,7 +1,3 @@
-
-
-
-
 # Andrei Milashevich
 
 ## Junior Front-End Developer
