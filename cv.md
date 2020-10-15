@@ -38,8 +38,7 @@ Military Academy of Republic of Belarus
 * LinkedIn: Figma: Handing off to Developers september 2020
 * LinkedIn: HTML Essential Training september 2020
 * LinkedIn: Programming Foundations: Databases september 2020
-
-UpSkillLab EPAM: september 2020 - present date
+* UpSkillLab EPAM: september 2020 - present date
 
 ### Languages: 
 * Russian - native
