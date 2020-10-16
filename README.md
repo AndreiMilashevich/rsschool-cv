@@ -1,1 +1,1 @@
- <https://andreimilashevich.github.io/rsschool-cv/cv>
+ <https://andreimilashevich.github.io/rsschool-cv/index.html>
