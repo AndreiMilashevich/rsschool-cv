@@ -12,7 +12,9 @@ body {
 }
 
 header {
-    border-radius: 20px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+
     background-color: #fde4cf;
     min-height: 400px;
     }
@@ -189,6 +191,7 @@ footer {
 }
 
 .education_courses {
+    padding-left: 10px;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
