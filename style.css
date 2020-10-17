@@ -322,7 +322,7 @@ footer {
 
 @media screen and (max-width: 360px) {
     a.contact_link {
-        font-size: 14px;
+        font-size: 12px;
     }
 
     a.contact_link.ln:before {
