@@ -320,3 +320,41 @@ footer {
    
 }
 
+@media screen and (max-width: 360px) {
+    a.contact_link {
+        font-size: 14px;
+    }
+
+    a.contact_link.ln:before {
+        margin: 1px;
+        width: 15px;
+        height: 15px;
+    }
+
+    a.contact_link.gh:before {
+        margin: 1px;
+        width: 15px;
+        height: 15px;
+    }
+
+    a.contact_link.tel:before {
+        margin: 1px;
+        width: 15px;
+        height: 15px;
+    }
+
+    li.link_contaner {
+        margin: 5px 0 5px 0;
+    }
+
+    a.contact_link.mail:before {
+        margin: 1px;
+        width: 15px;
+        height: 15px;
+    }
+
+    #contact_foto {
+      justify-content: flex-start;  
+    }
+
+}
