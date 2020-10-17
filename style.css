@@ -1,6 +1,11 @@
 body {    
     background-color: lightgoldenrodyellow;
     font-size: 20px;
+    padding: 0;
+}
+
+p {
+    text-align: justify;
 }
 .contaner {
     box-shadow: 5px 5px 5px rgba(122, 122, 122, 0.5);
@@ -182,16 +187,18 @@ footer {
 }
 
 .skills_lang {
+    background-color: #fde4cf;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     flex-wrap: wrap;
-    border-right: 1px dotted ;
-    padding-right: 50px;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 .education_courses {
-    padding-left: 10px;
+    background-color: #fde4cf;
+    padding-left: 20px;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -207,11 +214,109 @@ footer {
 }
 
 .wrapper {
+    padding: 20px;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap-reverse;
 }
 
 footer {
-    padding-right: 150px;
+    padding-bottom: 10px;
+
 }
+
+.summary {
+    padding: 20px;
+}
+
+@media screen and (max-width: 1024px) {
+    
+
+}
+
+@media screen and (max-width: 996px) {
+    .skills_lang {
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-evenly;
+        display: flex;
+        flex-wrap: wrap;
+        
+    } 
+    .Languages {
+        text-align: left;  
+    }
+    
+    .education_courses {
+        width: 100%;
+    }
+    
+}
+
+@media screen and (max-width: 500px) {
+    .name {
+        font-size: 20px;
+    }
+
+    h3 {
+        margin: 10px;
+
+    }
+
+    h2.position {
+        margin: 15px;
+        
+        margin-left: 20%;
+    }
+
+    .wrapper {
+        padding: 0;
+    }
+
+    p.summary {
+        padding: 0;
+    }
+
+    div.education_courses {
+        padding: 0;
+    }
+
+    div.skills_lang {
+        padding: 0;
+    }
+
+    .section {
+        padding: 0;
+    }
+
+    .position {
+        font-size: 16px;
+        width: 60%;
+    }
+
+    li.link_contaner {
+        margin: 10px;
+    }
+
+    body {
+        font-size: 15px;
+    }
+    .skills_lang {
+        width: 100%;
+        flex-direction: column;
+        justify-content: space-evenly;
+        display: flex;
+        flex-wrap: nowrap;}
+
+    ul#link_list {
+        margin:  0;
+        padding: 0;          
+    }
+
+    img#foto {
+        width: 90%;
+        margin: 0 auto;
+    }
+   
+}
+
