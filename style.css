@@ -23,11 +23,11 @@ header {
   min-height: 400px;
 }
 
-#photo {
+.photo {
   width: 270px;
 }
 
-#contact_photo {
+.contact_photo_wrapper {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -72,7 +72,7 @@ h3 {
   margin: 30px auto;
 }
 
-#contacts {
+.contacts {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -177,7 +177,7 @@ footer {
   padding-right: 10px;
 }
 
-#link_list {
+.link_list {
   list-style-type: none;
 }
 
@@ -209,7 +209,7 @@ footer {
     flex-wrap: wrap;
   }
 
-  .Languages {
+  .languages {
     text-align: left;
   }
 
@@ -241,12 +241,12 @@ footer {
     padding: 0;
   }
 
-  div.education_courses {
-    padding: 0;
+  .education_courses {
+    padding: 0 10px 0 10px;
   }
 
-  div.skills_lang {
-    padding: 0;
+  .skills_lang {
+    padding: 0 10px 0 10px;
   }
 
   .section {
@@ -258,7 +258,7 @@ footer {
     width: 60%;
   }
 
-  li.link_contaner {
+  .link_contaner {
     margin: 10px;
   }
 
@@ -267,57 +267,62 @@ footer {
   }
   .skills_lang {
     width: 100%;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: space-evenly;
     display: flex;
     flex-wrap: nowrap;
   }
 
-  ul#link_list {
+  .link_list {
     margin: 0;
     padding: 0;
   }
 
-  img#photo {
+  img.photo {
     width: 90%;
     margin: 0 auto;
   }
 }
 
 @media screen and (max-width: 360px) {
-  a.contact_link {
+  .contact_link {
     font-size: 12px;
   }
 
-  a.contact_link.ln:before {
+  .skills_lang {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .contact_link.ln:before {
     margin: 1px;
     width: 15px;
     height: 15px;
   }
 
-  a.contact_link.gh:before {
+  .contact_link.gh:before {
     margin: 1px;
     width: 15px;
     height: 15px;
   }
 
-  a.contact_link.tel:before {
+  .contact_link.tel:before {
     margin: 1px;
     width: 15px;
     height: 15px;
   }
 
-  li.link_contaner {
+  .link_contaner {
     margin: 5px 0 5px 0;
   }
 
-  a.contact_link.mail:before {
+  .contact_link.mail:before {
     margin: 1px;
     width: 15px;
     height: 15px;
   }
 
-  #contact_photo {
+  .contact_photo_wrapper {
     justify-content: flex-start;
   }
 }
