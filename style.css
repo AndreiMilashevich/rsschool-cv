@@ -117,13 +117,12 @@ h3 {
 .contact_link:hover:before {
   content: "";
   background-size: cover;
-  height: 30px;
-  width: 30px;
   border-radius: 50%;
-  margin-right: 15px;
-  margin-left: 5px;
   display: inline-block;
   vertical-align: middle;
+  transition: all 0.3s;
+  transform: rotate(-30deg)  scale(1.4);
+  
 }
 
 .gh:hover:before {
@@ -220,9 +219,10 @@ footer {
     margin: 0;
   }
 
-  .contact_link:before {
-    margin: 5px 20px 10px 0  
-  }
+  .contact_link:hover:before {
+    transition: all 0.3s;
+    transform: rotate(-30deg)  scale(1.4);
+      }
 
   .contact_link {
       font-size: 18px;
@@ -299,7 +299,12 @@ footer {
     margin: 0 10px;
     width: 15px;
     height: 15px;
-  }
+      }
+
+.contact_link:hover:before {
+    transition: all 0.3s;
+    transform: rotate(-30deg)  scale(1.5);
+}
 
   .link_container {
     margin: 5px 0;
