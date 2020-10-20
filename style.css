@@ -182,10 +182,6 @@ footer {
   list-style-type: none;
 }
 
-.link_contaner {
-  margin-top: 20px;
-}
-
 .wrapper {
   padding: 20px;
   display: flex;
@@ -225,11 +221,11 @@ footer {
   }
 
   .contact_link:before {
-    margin: 5px 20px 10px 0  
+    margin: 5px 20px 10px 0;
   }
 
   .contact_link {
-      font-size: 18px;
+    font-size: 18px;
   }
 
   .container {
@@ -254,11 +250,14 @@ footer {
     margin-left: 20%;
   }
 
-  .wrapper, .summary, .section {
+  .wrapper,
+  .summary,
+  .section {
     padding: 0;
   }
 
-  .education_courses, .skills_lang {
+  .education_courses,
+  .skills_lang {
     padding: 0 10px;
   }
 
