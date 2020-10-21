@@ -197,6 +197,30 @@ footer {
   padding: 20px;
 }
 
+.cat {
+  animation-name: cat;
+  animation-duration: 1s;
+  animation-timing-function: step-end;
+  animation-iteration-count: infinite;
+  animation-delay: 0s;
+  width: 420px;
+  position: relative;
+  left: 30%;
+  height: 172px;
+  background-image: url(images/cat-walk.png);
+  border-bottom: 1px solid black;
+}
+
+.cat:hover {
+  
+  animation-name: catdown;
+  animation-duration: 0.5s;
+  animation-timing-function: step-end;
+  animation-iteration-count: 1;
+  animation-delay: 0s;
+  animation-fill-mode: forwards;
+}
+
 @media screen and (max-width: 996px) {
   .skills_lang {
     width: 100%;
@@ -311,4 +335,72 @@ footer {
   .contact_photo_wrapper {
     justify-content: flex-start;
   }
+}
+
+@keyframes cat {
+    0% {
+    background-position: 0px -207px;
+  }
+
+  10% {
+    background-position: 0px -407px;
+  }
+
+  20% {
+    background-position: 0px -610px;
+  }
+
+  30% {
+    background-position: 0px -805px;
+  }
+
+  40% {
+    background-position: 0px -1005px;
+  }
+
+  50% {
+    background-position: 0px -1205px;
+  }
+
+  60% {
+    background-position: 0px -1405px;
+  }
+
+  70% {
+    background-position: 0px -1605px;
+  }
+
+  80% {
+    background-position: 0px -1805px;
+  }
+
+  90% {
+    background-position: 0px -2005px;
+  }
+
+  100% {
+    background-position: 0px -2205px;
+  }
+}
+
+@keyframes catdown {
+  0% {
+  background-position: -395px -207px;
+}
+
+25% {
+  background-position: -395px -407px;
+}
+
+50% {
+  background-position: -395px -610px;
+}
+
+75% {
+  background-position: -395px -805px;
+}
+
+100% {
+  background-position: -395px -1005px;
+}
 }
