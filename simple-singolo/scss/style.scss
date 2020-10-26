@@ -1,6 +1,10 @@
+$color_main: #000;
+
+
 .bg-ico_linkedin {
     width: 32px; height: 33px;
     background: url('css_sprites.png') -10px -170px;
+    color: $color_main;
 }
 
 .bg-ico_twitter {
