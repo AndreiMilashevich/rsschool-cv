@@ -1,0 +1,49 @@
+.bg-ico_linkedin {
+    width: 32px; height: 33px;
+    background: url('css_sprites.png') -10px -170px;
+}
+
+.bg-ico_twitter {
+    width: 32px; height: 33px;
+    background: url('css_sprites.png') -62px -170px;
+}
+
+.bg-ico_google_plus {
+    width: 32px; height: 33px;
+    background: url('css_sprites.png') -114px -170px;
+}
+
+.bg-ico_facebook {
+    width: 32px; height: 33px;
+    background: url('css_sprites.png') -166px -170px;
+}
+
+.bg-services_item_6 {
+    width: 60px; height: 60px;
+    background: url('css_sprites.png') -10px -10px;
+}
+
+.bg-services_item_3 {
+    width: 60px; height: 60px;
+    background: url('css_sprites.png') -90px -10px;
+}
+
+.bg-services_item_5 {
+    width: 60px; height: 60px;
+    background: url('css_sprites.png') -10px -90px;
+}
+
+.bg-services_item_2 {
+    width: 60px; height: 60px;
+    background: url('css_sprites.png') -90px -90px;
+}
+
+.bg-services_item_4 {
+    width: 60px; height: 60px;
+    background: url('css_sprites.png') -170px -10px;
+}
+
+.bg-services_item_1 {
+    width: 60px; height: 60px;
+    background: url('css_sprites.png') -170px -90px;
+}
