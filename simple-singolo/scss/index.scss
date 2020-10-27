@@ -1,0 +1,28 @@
+@import "variables";
+@import "mixin";
+@import "fonts";
+@import "header";
+@import "footer";
+@import "portfolio";
+
+html {
+  font-size: 10px;  
+}
+
+body {
+    font-family: 'Lato', sans-serif;
+    margin: 0;
+}
+
+.container {
+    @include container(1020px);
+    margin: 0 auto;
+}
+
+li {
+    list-style: none;
+}
+
+ul {
+    margin: 0;
+}

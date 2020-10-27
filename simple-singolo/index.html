@@ -4,24 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Singolo</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
-        <div class="wrapper">
-            <div class="logo"><h1>singolo<sup>*</sup></h1></div>
+        <div class="container header">
+            <div class="logo"><h1>singolo<span>*</span></h1></div>
             <nav>
-                <ul class="main_menu">
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
+                <ul class="menu">
+                    <li class="menu_item"><a href="" class="main_menu">home</a></li>
+                    <li class="menu_item"><a href="" class="main_menu">services</a></li>
+                    <li class="menu_item"><a href="" class="main_menu">portfolio</a></li>
+                    <li class="menu_item"><a href="" class="main_menu">about</a></li>
+                    <li class="menu_item"><a href="" class="main_menu">contact</a></li>
                 </ul>
             </nav>
         </div>
     </header>
     <section class="slider">
-        <div class="wrapper">
+        <div class="container">
             <div></div>
             <div></div>
             <div></div>
@@ -29,8 +31,11 @@
         </div>
     </section>
     <section class="servises">
-        <div class="wrapper">
-            <div></div>
+        <div class="container">
+            <h2>our servises</h2>
+            <p class="summary">Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum.
+                 Duis mollis, non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.
+                  Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</p>
             <div>
                 <div></div>
                 <div></div>
@@ -42,40 +47,46 @@
         </div>
     </section>
     <section class="portfolio">
-        <div></div>
+        <div class="container">
+        <h2>portfolio</h2>
+        <p class="summary">Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.</p>
         <div>
             <ul>
-                <li></li>
-                <li></li>
-                <li></li>
+                <li class="filter">all</li>
+                <li class="filter">web design</li>
+                <li class="filter">grafic design</li>
+                <li class="filter">artwork</li>
             </ul>
         </div>
         <div>
             <ul class="portfolio_images">
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
+                <li class="image"><img src="images/portfolio-1.png" alt="" srcset=""></li>
+                <li class="image"><img src="images/portfolio-2.png" alt="" srcset=""></li>
+                <li class="image"><img src="images/portfolio-3.png" alt="" srcset=""></li>
+                <li class="image"><img src="images/portfolio-4.png" alt="" srcset=""></li>
+                <li class="image"><img src="images/portfolio-5.png" alt="" srcset=""></li>
+                <li class="image"><img src="images/portfolio-6.png" alt="" srcset=""></li>
+                <li class="image"><img src="images/portfolio-7.png" alt="" srcset=""></li>
+                <li class="image"><img src="images/portfolio-8.png" alt="" srcset=""></li>
+                <li class="image"><img src="images/portfolio-9.png" alt="" srcset=""></li>
+                <li class="image"><img src="images/portfolio-10.png" alt="" srcset=""></li>
+                <li class="image"><img src="images/portfolio-11.png" alt="" srcset=""></li>
+                <li class="image"><img src="images/portfolio-12.png" alt="" srcset=""></li>
             </ul>
+        </div>
         </div>
     </section>
     <footer>
-        <div>&#169; Copyright 2013</div>
-        <div>
-            <ul class="sotial_media">
-                <li class="facebook_link"></li>
-                <li class="google_link"></li>
-                <li class="twitter_link"></li>
-                <li class="linkedin_link"></li>
-            </ul>
+        <div class="container footer">
+            <div class="copyright">
+                &#169; Copyright 2013
+            </div>
+        <div class="social_media_container">
+                <a href="https://www.facebook.com/"><div class="facebook_link"></div></a>
+                <a href="https://plus.google.com/"><div class="google_link"></div></a>
+                <a href="https://twitter.com/"><div class="twitter_link"></div></a>
+                <a href="https://www.linkedin.com/"><div class="linkedin_link"></div></a>
+        </div>
         </div>
     </footer>
 </body>
