@@ -26,7 +26,8 @@ header {
   .menu_item:before {
     content: '\2022';
     display: inline-block;
-    padding: 0 15px; }
+    padding: 0 15px;
+    font-size: 0.5rem; }
 
 .menu_item:first-child:before {
   content: ''; }
@@ -139,7 +140,8 @@ h2 {
   font-size: 3rem;
   padding-top: 59px;
   padding-left: 40px;
-  margin: 0; }
+  margin: 0;
+  text-transform: capitalize; }
 
 .filter {
   display: inline-block;
@@ -160,6 +162,93 @@ h2 {
 
 .image {
   padding: 10px; }
+
+.servises {
+  color: #666D89; }
+
+.servises_list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  text-align: justify;
+  padding: 42px 0 52px 0; }
+
+h3 {
+  font-size: 1.8rem;
+  margin-top: 0; }
+
+.design:before {
+  content: '';
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+  background: url("../images/css_sprites.png") -170px -90px;
+  position: absolute;
+  left: 40px;
+  top: 0; }
+
+.ideas:before {
+  content: '';
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+  background: url("../images/css_sprites.png") -90px -90px;
+  position: absolute;
+  left: 40px;
+  top: 0; }
+
+.star:before {
+  content: '';
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+  background: url("../images/css_sprites.png") -90px -10px;
+  position: absolute;
+  left: 40px;
+  top: 0; }
+
+.love:before {
+  content: '';
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+  background: url("../images/css_sprites.png") -10px -10px;
+  position: absolute;
+  left: 40px;
+  top: 0; }
+
+.responsive:before {
+  content: '';
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+  background: url("../images/css_sprites.png") -170px -10px;
+  position: absolute;
+  left: 40px;
+  top: 0; }
+
+.support:before {
+  content: '';
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+  background: url("../images/css_sprites.png") -10px -90px;
+  position: absolute;
+  left: 40px;
+  top: 0; }
+
+.servis-item {
+  height: 104px;
+  width: 220px;
+  overflow: hidden;
+  padding-left: 110px;
+  position: relative;
+  margin-bottom: 20px; }
+  .servis-item p {
+    font-size: 1.2rem;
+    line-height: 2.2rem;
+    margin: 0;
+    text-overflow: clip; }
 
 html {
   font-size: 10px; }
