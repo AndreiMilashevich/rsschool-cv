@@ -2,7 +2,10 @@ header {
   background-color: #2D303A;
   width: 100%;
   border-bottom: 6px solid #323746;
-  font-weight: bold; }
+  font-weight: bold;
+  position: fixed;
+  top: 0;
+  z-index: 100; }
 
 .menu {
   padding-right: 40px;
@@ -267,3 +270,14 @@ li {
 
 ul {
   margin: 0; }
+
+.slider {
+  background-color: #F06C64;
+  margin-top: 100px;
+  border-bottom: 6px solid #EA676B; }
+
+.vertical_phone {
+  background: url("../images/phone-vertical-display.png") 126px 119px no-repeat, url("../images/phone-vertical.svg") 112px 54px no-repeat;
+  height: 458px;
+  width: 216px;
+  padding: 54px 0 88px 112px; }

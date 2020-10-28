@@ -1,0 +1,14 @@
+.slider {
+    background-color: $slider_color;
+    margin-top: 100px;
+    border-bottom: 6px solid $slider_border;
+}
+
+.vertical_phone {
+    background:url('../images/phone-vertical-display.png') 126px 119px no-repeat, url('../images/phone-vertical.svg') 112px 54px no-repeat ;
+    height: 458px;
+    width: 216px;
+    padding: 54px 0 88px 112px;
+    
+    
+}

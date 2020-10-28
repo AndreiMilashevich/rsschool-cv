@@ -5,6 +5,9 @@ header {
     width: 100%;
     border-bottom: 6px solid $header_border;
     font-weight: bold;
+    position: fixed;
+    top: 0;
+    z-index: 100;
 }
 
 .menu {
