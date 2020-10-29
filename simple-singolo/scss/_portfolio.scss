@@ -24,6 +24,11 @@ h2 {
     font-size: 1.2rem;
     padding: 5px;
     text-transform: capitalize;
+    cursor: pointer;
+    &:hover {
+        color: $hover_color;
+        border-color: $hover_color;
+    }
 }
 
 .portfolio_images {

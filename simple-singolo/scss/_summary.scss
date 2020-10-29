@@ -10,6 +10,7 @@ html {
   .container {
       @include container(1020px);
       margin: 0 auto;
+      position: relative;
   }
   
   li {

@@ -30,7 +30,8 @@ header {
     content: '\2022';
     display: inline-block;
     padding: 0 15px;
-    font-size: 0.5rem; }
+    font-size: 0.5rem;
+    vertical-align: middle; }
 
 .menu_item:first-child:before {
   content: ''; }
@@ -153,7 +154,11 @@ h2 {
   margin-right: 10px;
   font-size: 1.2rem;
   padding: 5px;
-  text-transform: capitalize; }
+  text-transform: capitalize;
+  cursor: pointer; }
+  .filter:hover {
+    color: #4d7198;
+    border-color: #4d7198; }
 
 .portfolio_images {
   display: flex;
@@ -263,7 +268,8 @@ body {
 .container {
   width: 1020px;
   margin: 0 auto;
-  margin: 0 auto; }
+  margin: 0 auto;
+  position: relative; }
 
 li {
   list-style: none; }
@@ -277,7 +283,36 @@ ul {
   border-bottom: 6px solid #EA676B; }
 
 .vertical_phone {
-  background: url("../images/phone-vertical-display.png") 126px 119px no-repeat, url("../images/phone-vertical.svg") 112px 54px no-repeat;
+  background: url("../images/phone-vertical-display.png") 126px 119px no-repeat, url("../images/phone-vertical.svg") 112px 54px no-repeat, url("../images/phone-vertical-shadow.png") 112px 54px no-repeat;
   height: 458px;
   width: 216px;
-  padding: 54px 0 88px 112px; }
+  padding: 54px 24px 88px 112px; }
+
+.horisontal_phone {
+  background: url("../images/phone-horizontal-display.png") 60px 191px no-repeat, url("../images/phone-horizontal.svg") 0 177px no-repeat, url("../images/phone-horizontal-shadow.png") 0 177px no-repeat;
+  width: 458px;
+  height: 216px;
+  padding: 177px 137px 207px 0; }
+
+.phones_1 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between; }
+
+.arrow_left {
+  width: 16px;
+  height: 27px;
+  background: url("../images/arrow-left.svg") no-repeat;
+  position: absolute;
+  top: 283px;
+  left: 40px;
+  cursor: pointer; }
+
+.arrow_right {
+  position: absolute;
+  width: 16px;
+  height: 27px;
+  background: url("../images/arrow-right.svg") no-repeat;
+  top: 283px;
+  right: 40px;
+  cursor: pointer; }
