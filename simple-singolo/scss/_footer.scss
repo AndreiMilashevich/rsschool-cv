@@ -9,18 +9,25 @@ footer {
     display: flex;
     flex-direction: row;
     padding: 22px 42px;
+    
 }
 
 
 
 .footer {
-    @include header_footer_flex;  
+    @include header_footer_flex;
+    @media screen and (max-width: $tablet) {
+        justify-content: center;
+    }  
 }
 
 .copyright {
     color: $portfolio_text;
     padding: 30px 0 29px 40px;
     font-size: 1.3rem;
+    @media screen and (max-width: $tablet) {
+        display: none;
+    }
 }
 
 .facebook_link {
