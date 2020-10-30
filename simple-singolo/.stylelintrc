@@ -1,0 +1,12 @@
+{
+  "extends": ["stylelint-config-standard", "stylelint-config-sass-guidelines"],
+  "rules": {
+    "color-hex-case": "lower",
+    "declaration-colon-newline-after": null,
+    "max-nesting-depth": 5,
+    "order/properties-alphabetical-order": null,
+    "selector-class-pattern": null,
+    "selector-no-qualifying-type": [true, { "ignore": ["attribute", "class"] }],
+    "selector-max-compound-selectors": 5
+  }
+}

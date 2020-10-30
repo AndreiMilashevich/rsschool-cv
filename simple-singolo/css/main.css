@@ -154,6 +154,9 @@ footer {
 .summary {
   font-size: 1.8rem;
   padding-left: 40px; }
+  @media screen and (max-width: 768px) {
+    .summary {
+      padding-left: 30px; } }
 
 h2 {
   font-size: 3rem;
@@ -161,6 +164,9 @@ h2 {
   padding-left: 40px;
   margin: 0;
   text-transform: capitalize; }
+  @media screen and (max-width: 768px) {
+    h2 {
+      padding-left: 30px; } }
 
 .filter {
   display: inline-block;
@@ -179,12 +185,12 @@ h2 {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  padding: 8px 30px 64px 30px;
+  padding: 8px 24px 64px 24px;
   justify-content: space-between;
   align-content: space-between; }
 
 .image {
-  padding: 10px; }
+  padding: 6px; }
   .image:before {
     content: '';
     display: block; }
@@ -193,11 +199,15 @@ h2 {
       width: calc(33% - 20px); } }
   @media screen and (max-width: 768px) {
     .image {
-      width: calc(50% - 20px); } }
+      width: calc(50% - 12px); } }
 
 img {
   width: 100%;
   height: 100%; }
+
+@media screen and (max-width: 768px) {
+  .filter_list {
+    padding-left: 30px; } }
 
 .servises {
   color: #666D89; }
@@ -214,7 +224,8 @@ img {
       padding-right: 0px; } }
   @media screen and (max-width: 768px) {
     .servises_list {
-      display: block; } }
+      display: block;
+      padding-left: 30px; } }
 
 h3 {
   font-size: 1.8rem;
@@ -346,6 +357,13 @@ ul {
       background: url("../images/phone-vertical-display.png") 90px 89px no-repeat, url("../images/phone-vertical.svg") 80px 40px no-repeat, url("../images/phone-vertical-shadow.png") 82px 42px no-repeat;
       background-size: 142px 250px , 162px 344px, 180px 363px;
       padding: 41px 24px 30px 86px; } }
+  @media screen and (max-width: 768px) {
+    .vertical_phone {
+      height: 168px;
+      width: 79px;
+      background: url("../images/phone-vertical-display.png") 85px 64px no-repeat, url("../images/phone-vertical.svg") 80px 40px no-repeat, url("../images/phone-vertical-shadow.png") 82px 42px no-repeat;
+      background-size: 69px 122px , 79px 168px, 88px 178px;
+      padding: 41px 24px 30px 86px; } }
 
 .horisontal_phone {
   background: url("../images/phone-horizontal-display.png") 60px 191px no-repeat, url("../images/phone-horizontal.svg") 0 177px no-repeat, url("../images/phone-horizontal-shadow.png") 0 177px no-repeat;
@@ -358,6 +376,13 @@ ul {
       width: 344px;
       background: url("../images/phone-horizontal-display.png") 45px 143px no-repeat, url("../images/phone-horizontal.svg") 0 133px no-repeat, url("../images/phone-horizontal-shadow.png") 0 133px no-repeat;
       background-size: 250px 142px, 344px 162px, 363px 180px;
+      padding: 133px 104px 156px 0; } }
+  @media screen and (max-width: 768px) {
+    .horisontal_phone {
+      height: 79px;
+      width: 168px;
+      background: url("../images/phone-horizontal-display.png") 22px 138px no-repeat, url("../images/phone-horizontal.svg") 0 133px no-repeat, url("../images/phone-horizontal-shadow.png") 0 133px no-repeat;
+      background-size: 122px 69px, 168px 79px, 178px 88px;
       padding: 133px 104px 156px 0; } }
 
 .phones_1 {

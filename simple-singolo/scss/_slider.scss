@@ -18,6 +18,13 @@
         background: url('../images/phone-vertical-display.png') 90px 89px  no-repeat, url('../images/phone-vertical.svg')  80px 40px no-repeat, url('../images/phone-vertical-shadow.png') 82px 42px no-repeat;
         background-size: 142px 250px , 162px 344px, 180px 363px ;
         padding: 41px 24px 30px 86px;
+    }
+    @media screen and (max-width: $tablet){
+        height: 168px;
+        width: 79px;
+        background: url('../images/phone-vertical-display.png') 85px 64px  no-repeat, url('../images/phone-vertical.svg')  80px 40px no-repeat, url('../images/phone-vertical-shadow.png') 82px 42px no-repeat;
+        background-size: 69px 122px , 79px 168px, 88px 178px ;
+        padding: 41px 24px 30px 86px;
     }    
 }
 
@@ -31,6 +38,13 @@
         width: 344px;
         background: url('../images/phone-horizontal-display.png') 45px 143px  no-repeat, url('../images/phone-horizontal.svg')  0 133px no-repeat, url('../images/phone-horizontal-shadow.png') 0 133px no-repeat;
         background-size: 250px 142px, 344px 162px, 363px 180px;
+        padding: 133px 104px 156px 0;
+}
+    @media screen and (max-width: $tablet){
+        height: 79px;
+        width: 168px;
+        background: url('../images/phone-horizontal-display.png') 22px 138px  no-repeat, url('../images/phone-horizontal.svg')  0 133px no-repeat, url('../images/phone-horizontal-shadow.png') 0 133px no-repeat;
+        background-size: 122px 69px, 168px 79px, 178px 88px;
         padding: 133px 104px 156px 0;
 } 
 }
