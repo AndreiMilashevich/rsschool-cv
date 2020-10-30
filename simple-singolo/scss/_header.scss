@@ -1,11 +1,12 @@
 header {
-  background-color: $main_color;
+  background-color: $main-color;
   width: 100%;
-  border-bottom: 6px solid $header_border;
+  border-bottom: 6px solid $header-border;
   font-weight: bold;
   position: fixed;
   top: 0;
   z-index: 100;
+  min-height: 79px;
 }
 
 .menu {
@@ -22,16 +23,16 @@ header {
   color: $header_text;
 
   &:hover {
-    color: $hover_color;
+    color: $hover-color;
   }
 
   &:active {
-    color: $slider_color;
+    color: $slider-color;
   }
 }
 
 .menu_item {
-  color: $header_text;
+  color: $header-text;
   display: inline-block;
   text-transform: uppercase;
   font-size: 1.2rem;
@@ -52,7 +53,7 @@ header {
 }
 
 .header {
-  @include header_footer_flex;
+  @include header-footer-flex;
 
   @media screen and (max-width: $tablet) {
     justify-content: center;
@@ -60,7 +61,7 @@ header {
 }
 
 h1 {
-  color: $header_text;
+  color: $header-text;
   margin: 0;
   padding: 29px 0 41px 40px;
   text-transform: uppercase;
@@ -69,12 +70,108 @@ h1 {
   font-weight: bold;
 
   @media screen and (max-width: $tablet) {
-    padding: 24px 0 23px;
+    padding: 24px 0 25px;
+    font-size: 2rem;
   }
 }
 
+.singolo {
+  color: $header-text;
+  margin: 0;
+  padding: 0;
+  text-transform: uppercase;
+  font-size: 2.5rem;
+  line-height: 3rem;
+  font-weight: bold;
+  display: none;
+}
+
 span {
-  color: $slider_color;
+  color: $slider-color;
   vertical-align: top;
   font-weight: bold;
+}
+
+.burger {
+  display: none;
+
+  @media screen and (max-width: $tablet) {
+    display: block;
+    position: absolute;
+    z-index: 300;
+    width: 25px;
+    height: 20px;
+    left: 25px;
+    top: 25px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+}
+
+.burger-line {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 25px;
+  height: 2px;
+  background-color: $header-text;
+}
+
+.second {
+  top: 10px;
+}
+
+.third {
+  top: 20px;
+}
+
+.rotate {
+  transform: rotate(90deg);
+  z-index: 251;
+  transition: 0.3s;
+}
+
+.mobile-menu {
+  position: fixed;
+  z-index: 250;
+  left: 0;
+  width: 75%;
+  height: 100%;
+  background-color: $main-color;
+  transition: 0.3s;
+  box-shadow: 0 85px 0 200px rgba(0, 0, 0, 0.4);
+}
+
+.hidden {
+  display: none;
+}
+
+.move-left {
+  position: absolute;
+  z-index: 300;
+  transition: 1s;
+  transform: translate(-100px, -5px);
+}
+
+.menu-vertical {
+  display: block;
+  position: fixed;
+  z-index: 350;
+  list-style: none;
+  text-transform: uppercase;
+  left: 70px;
+  top: 30%;
+  font-size: 2.4rem;
+  padding-top: 10px;
+}
+
+.menu_item_v {
+  padding-bottom: 25px;
+}
+
+.close {
+  width: 0;
+  height: 0;
+  transition: 0.3s;
+  box-shadow: none;
 }

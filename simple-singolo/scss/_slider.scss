@@ -1,90 +1,105 @@
 .slider {
-    background-color: $slider_color;
-    margin-top: 100px;
-    border-bottom: 6px solid $slider_border;
-    @media screen and (max-width: $tablet) {
-       margin-top: 83px; 
-    }
+  background-color: $slider-color;
+  margin-top: 100px;
+  border-bottom: 6px solid $slider-border;
+
+  @media screen and (max-width: $tablet) {
+    margin-top: 83px;
+  }
 }
 
 .vertical_phone {
-    background:url('../images/phone-vertical-display.png') 126px 119px no-repeat, url('../images/phone-vertical.svg') 112px 54px no-repeat, url('../images/phone-vertical-shadow.png') 112px 54px no-repeat;
-    height: 458px;
-    width: 216px;
-    padding: 54px 24px 88px 112px;
-    @media screen and (max-width: $desctop){
-        height: 344px;
-        width: 162px;
-        background: url('../images/phone-vertical-display.png') 90px 89px  no-repeat, url('../images/phone-vertical.svg')  80px 40px no-repeat, url('../images/phone-vertical-shadow.png') 82px 42px no-repeat;
-        background-size: 142px 250px , 162px 344px, 180px 363px ;
-        padding: 41px 24px 30px 86px;
-    }
-    @media screen and (max-width: $tablet){
-        height: 168px;
-        width: 79px;
-        background: url('../images/phone-vertical-display.png') 85px 64px  no-repeat, url('../images/phone-vertical.svg')  80px 40px no-repeat, url('../images/phone-vertical-shadow.png') 82px 42px no-repeat;
-        background-size: 69px 122px , 79px 168px, 88px 178px ;
-        padding: 41px 24px 30px 86px;
-    }    
+  background: url('../images/phone-vertical-display.png') 126px 119px no-repeat, url('../images/phone-vertical.svg') 112px 54px no-repeat, url('../images/phone-vertical-shadow.png') 112px 54px no-repeat;
+  height: 458px;
+  width: 216px;
+  padding: 54px 24px 88px 112px;
+
+  @media screen and (max-width: $desctop) {
+    height: 344px;
+    width: 162px;
+    background: url('../images/phone-vertical-display.png') 90px 89px  no-repeat, url('../images/phone-vertical.svg')  80px 40px no-repeat, url('../images/phone-vertical-shadow.png') 82px 42px no-repeat;
+    background-size: 142px 250px, 162px 344px, 180px 363px;
+    padding: 41px 24px 30px 86px;
+  }
+
+  @media screen and (max-width: $tablet) {
+    height: 168px;
+    width: 79px;
+    background: url('../images/phone-vertical-display.png') 45px 44px  no-repeat, url('../images/phone-vertical.svg')  40px 20px no-repeat, url('../images/phone-vertical-shadow.png') 40px 20px no-repeat;
+    background-size: 69px 122px, 79px 168px, 88px 178px;
+    padding: 20px 24px 30px 40px;
+  }
 }
 
-.horisontal_phone {
-    background: url('../images/phone-horizontal-display.png') 60px 191px  no-repeat, url('../images/phone-horizontal.svg')  0 177px no-repeat, url('../images/phone-horizontal-shadow.png') 0 177px no-repeat;   
-    height: 216px;
-    width: 458px;
-    padding: 177px 137px 207px 0; 
-    @media screen and (max-width: $desctop){
-        height: 162px;
-        width: 344px;
-        background: url('../images/phone-horizontal-display.png') 45px 143px  no-repeat, url('../images/phone-horizontal.svg')  0 133px no-repeat, url('../images/phone-horizontal-shadow.png') 0 133px no-repeat;
-        background-size: 250px 142px, 344px 162px, 363px 180px;
-        padding: 133px 104px 156px 0;
-}
-    @media screen and (max-width: $tablet){
-        height: 79px;
-        width: 168px;
-        background: url('../images/phone-horizontal-display.png') 22px 138px  no-repeat, url('../images/phone-horizontal.svg')  0 133px no-repeat, url('../images/phone-horizontal-shadow.png') 0 133px no-repeat;
-        background-size: 122px 69px, 168px 79px, 178px 88px;
-        padding: 133px 104px 156px 0;
-} 
+.horizontal_phone {
+  background: url('../images/phone-horizontal-display.png') 60px 191px  no-repeat, url('../images/phone-horizontal.svg')  0 177px no-repeat, url('../images/phone-horizontal-shadow.png') 0 177px no-repeat;
+  height: 216px;
+  width: 458px;
+  padding: 177px 137px 207px 0;
+
+  @media screen and (max-width: $desctop) {
+    height: 162px;
+    width: 344px;
+    background: url('../images/phone-horizontal-display.png') 45px 143px  no-repeat, url('../images/phone-horizontal.svg')  0 133px no-repeat, url('../images/phone-horizontal-shadow.png') 0 133px no-repeat;
+    background-size: 250px 142px, 344px 162px, 363px 180px;
+    padding: 133px 104px 156px 0;
+  }
+
+  @media screen and (max-width: $tablet) {
+    height: 79px;
+    width: 168px;
+    background: url('../images/phone-horizontal-display.png') 22px 70px  no-repeat, url('../images/phone-horizontal.svg')  0 65px no-repeat, url('../images/phone-horizontal-shadow.png') 0 65px no-repeat;
+    background-size: 122px 69px, 168px 79px, 178px 88px;
+    padding: 65px 50px 76px 0;
+  }
 }
 
 .phones_1 {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    @media screen and (max-width: $desctop){
-        justify-content: space-around; 
-    }
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  @media screen and (max-width: $desctop) {
+    justify-content: space-around;
+  }
 }
 
 .arrow_left {
-    width: 16px;
-    height: 27px;
-    background: url('../images/arrow-left.svg') no-repeat;
-    position: absolute;
-    top: 283px;
-    left: 40px;
-    cursor: pointer;
-    @media screen and (max-width: $desctop){
-        top: 212px;
-        left: 29px;    
-    }
+  width: 16px;
+  height: 27px;
+  background: url('../images/arrow-left.svg') no-repeat;
+  position: absolute;
+  top: 283px;
+  left: 40px;
+  cursor: pointer;
+
+  @media screen and (max-width: $desctop) {
+    top: 212px;
+    left: 29px;
+  }
+
+  @media screen and (max-width: $tablet) {
+    top: 100px;
+    left: 10px;
+  }
 }
 
 .arrow_right {
-    position: absolute;
-    width: 16px;
-    height: 27px;
-    background: url('../images/arrow-right.svg') no-repeat;
-    top: 283px;
-    right: 40px;
-    cursor: pointer;
-    @media screen and (max-width: $desctop){
-        top: 212px;
-        right: 29px;    
-    }
+  position: absolute;
+  width: 16px;
+  height: 27px;
+  background: url('../images/arrow-right.svg') no-repeat;
+  top: 283px;
+  right: 40px;
+  cursor: pointer;
+
+  @media screen and (max-width: $desctop) {
+    top: 212px;
+    right: 29px;
+  }
+
+  @media screen and (max-width: $tablet) {
+    top: 100px;
+    right: 10px;
+  }
 }
-
-
-

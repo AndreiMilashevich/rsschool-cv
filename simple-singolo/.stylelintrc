@@ -6,7 +6,7 @@
     "max-nesting-depth": 5,
     "order/properties-alphabetical-order": null,
     "selector-class-pattern": null,
-    "selector-no-qualifying-type": [true, { "ignore": ["attribute", "class"] }],
+    "selector-no-qualifying-type": [true, { "ignore": ["attribute", "class","id"] }],
     "selector-max-compound-selectors": 5
   }
 }

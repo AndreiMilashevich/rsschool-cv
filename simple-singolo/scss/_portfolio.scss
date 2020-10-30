@@ -1,6 +1,6 @@
 .portfolio {
-  background-color: $main_color;
-  color: $portfolio_text;
+  background-color: $main-color;
+  color: $portfolio-text;
 }
 
 .summary {
@@ -27,7 +27,7 @@ h2 {
 .filter {
   display: inline-block;
   border-radius: 5px;
-  border: 1px solid $portfolio_text;
+  border: 1px solid $portfolio-text;
   margin-right: 10px;
   font-size: 1.2rem;
   padding: 5px;
@@ -36,7 +36,7 @@ h2 {
 
   &:hover {
     color: $hover_color;
-    border-color: $hover_color;
+    border-color: $hover-color;
   }
 }
 
@@ -44,13 +44,17 @@ h2 {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  padding: 8px 24px 64px;
+  padding: 8px 30px 64px;
   justify-content: space-between;
   align-content: space-between;
+
+  @media screen and (max-width: $tablet) {
+    padding: 8px 24px 64px;
+  }
 }
 
 .image {
-  padding: 6px;
+  padding: 10px;
 
   &::before {
     content: '';
@@ -58,6 +62,7 @@ h2 {
   }
 
   @media screen and (max-width: $desctop) {
+    padding: 6px;
     width: calc(33% - 20px);
   }
 
