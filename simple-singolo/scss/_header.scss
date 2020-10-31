@@ -25,10 +25,12 @@ header {
   &:hover {
     color: $hover-color;
   }
+}
 
-  &:active {
-    color: $slider-color;
-  }
+.main_menu_v {
+  text-decoration: none;
+  color: $header_text;
+  transition: 0.3s;
 }
 
 .menu_item {
@@ -38,6 +40,7 @@ header {
   font-size: 1.2rem;
   padding-top: 42px;
   padding-bottom: 39px;
+  cursor: pointer;
 
   &::before {
     content: '\2022';
@@ -138,8 +141,8 @@ span {
   width: 75%;
   height: 100%;
   background-color: $main-color;
-  transition: 0.3s;
-  box-shadow: 0 85px 0 200px rgba(0, 0, 0, 0.4);
+  transition: 0.2s;
+  box-shadow: 0 85px 0 200px rgba(0, 0, 0, 0.4), 0 0 20px 0 rgba(0, 0, 0, 1);
 }
 
 .hidden {
@@ -150,7 +153,7 @@ span {
   position: absolute;
   z-index: 300;
   transition: 1s;
-  transform: translate(-100px, -5px);
+  transform: translate(calc(-100% + 40px), 0);
 }
 
 .menu-vertical {
@@ -159,7 +162,7 @@ span {
   z-index: 350;
   list-style: none;
   text-transform: uppercase;
-  left: 70px;
+  left: 10%;
   top: 30%;
   font-size: 2.4rem;
   padding-top: 10px;
@@ -167,6 +170,7 @@ span {
 
 .menu_item_v {
   padding-bottom: 25px;
+  cursor: pointer;
 }
 
 .close {
@@ -174,4 +178,10 @@ span {
   height: 0;
   transition: 0.3s;
   box-shadow: none;
+  color: rgba(255, 255, 255, 0);
+  font-size: 0;
+}
+
+.active {
+  color: $slider-color;
 }

@@ -56,6 +56,10 @@ h2 {
 .image {
   padding: 10px;
 
+  &:nth-child(1n + 13) {
+    display: none;
+  }
+
   &::before {
     content: '';
     display: block;
@@ -68,6 +72,10 @@ h2 {
 
   @media screen and (max-width: $tablet) {
     width: calc(50% - 12px);
+
+    &:nth-child(1n + 9) {
+      display: none;
+    }
   }
 }
 

@@ -19,6 +19,9 @@ li {
 ul {
   margin: 0; }
 
+.no-scroll {
+  overflow: hidden; }
+
 header {
   background-color: #2d303a;
   width: 100%;
@@ -41,8 +44,11 @@ header {
   color: #fff; }
   .main_menu:hover {
     color: #4d7198; }
-  .main_menu:active {
-    color: #f06c64; }
+
+.main_menu_v {
+  text-decoration: none;
+  color: #fff;
+  transition: 0.3s; }
 
 .menu_item {
   color: #fff;
@@ -50,7 +56,8 @@ header {
   text-transform: uppercase;
   font-size: 1.2rem;
   padding-top: 42px;
-  padding-bottom: 39px; }
+  padding-bottom: 39px;
+  cursor: pointer; }
   .menu_item::before {
     content: '\2022';
     display: inline-block;
@@ -137,8 +144,8 @@ span {
   width: 75%;
   height: 100%;
   background-color: #2d303a;
-  transition: 0.3s;
-  box-shadow: 0 85px 0 200px rgba(0, 0, 0, 0.4); }
+  transition: 0.2s;
+  box-shadow: 0 85px 0 200px rgba(0, 0, 0, 0.4), 0 0 20px 0 black; }
 
 .hidden {
   display: none; }
@@ -147,7 +154,7 @@ span {
   position: absolute;
   z-index: 300;
   transition: 1s;
-  transform: translate(-100px, -5px); }
+  transform: translate(calc(-100% + 40px), 0); }
 
 .menu-vertical {
   display: block;
@@ -155,19 +162,25 @@ span {
   z-index: 350;
   list-style: none;
   text-transform: uppercase;
-  left: 70px;
+  left: 10%;
   top: 30%;
   font-size: 2.4rem;
   padding-top: 10px; }
 
 .menu_item_v {
-  padding-bottom: 25px; }
+  padding-bottom: 25px;
+  cursor: pointer; }
 
 .close {
   width: 0;
   height: 0;
   transition: 0.3s;
-  box-shadow: none; }
+  box-shadow: none;
+  color: rgba(255, 255, 255, 0);
+  font-size: 0; }
+
+.active {
+  color: #f06c64; }
 
 footer {
   background-color: #2d303a;
@@ -299,6 +312,8 @@ h2 {
 
 .image {
   padding: 10px; }
+  .image:nth-child(1n + 13) {
+    display: none; }
   .image::before {
     content: '';
     display: block; }
@@ -308,7 +323,9 @@ h2 {
       width: calc(33% - 20px); } }
   @media screen and (max-width: 768px) {
     .image {
-      width: calc(50% - 12px); } }
+      width: calc(50% - 12px); }
+      .image:nth-child(1n + 9) {
+        display: none; } }
 
 img {
   width: 100%;
