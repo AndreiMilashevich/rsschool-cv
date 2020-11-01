@@ -15,6 +15,18 @@ const serviceMenuButtonVertical = document.querySelector('.service-button-vertic
 const portfolioMenuButtonVertical = document.querySelector('.portfolio-button-vertical');
 const homeMenuButtonVertical = document.querySelector('.home-button-vertical')
 
+const filterButtonAll = document.querySelector('.all-button');
+const filterButtonWeb = document.querySelector('.webdesign-button');
+const filterButtonGraphic = document.querySelector('.graphicdesign-button');
+const filterButtonArt = document.querySelector('.artwork-button');
+
+const portfolioImagesAll = document.querySelectorAll('.image');
+const portfolioImagesWeb = document.querySelectorAll('.webdesign-image');
+const portfolioImagesGraphic = document.querySelectorAll('.graphicdesign-image');
+const portfolioImagesArt = document.querySelectorAll('.artwork-image');
+
+const filterButtons = document.querySelectorAll('.filter');
+
 
 // menu animation
 
@@ -134,4 +146,55 @@ homeMenuButtonVertical.addEventListener('click', () => {
   menu[i].classList.toggle('close');
   }
   window.scrollTo(0, 0);
+})
+
+//portfolio filter
+
+filterButtonWeb.addEventListener('click', () => {
+  for (let i = 0; i < filterButtons.length; i++) {
+    filterButtons[i].classList.remove('filter-active');
+  }
+  filterButtonWeb.classList.add('filter-active');
+  for (let i = 0; i < portfolioImagesAll.length; i++) {
+    portfolioImagesAll[i].classList.remove('order');
+  }
+  for (let i = 0; i < portfolioImagesWeb.length; i++) {
+    portfolioImagesWeb[i].classList.add('order');
+  }
+})
+
+filterButtonArt.addEventListener('click', () => {
+  for (let i = 0; i < filterButtons.length; i++) {
+    filterButtons[i].classList.remove('filter-active');
+  }
+  filterButtonArt.classList.add('filter-active');
+  for (let i = 0; i < portfolioImagesAll.length; i++) {
+    portfolioImagesAll[i].classList.remove('order');
+  }
+  for (let i = 0; i < portfolioImagesArt.length; i++) {
+    portfolioImagesArt[i].classList.add('order');
+  }
+})
+
+filterButtonGraphic.addEventListener('click', () => {
+  for (let i = 0; i < filterButtons.length; i++) {
+    filterButtons[i].classList.remove('filter-active');
+  }
+  filterButtonGraphic.classList.add('filter-active');
+  for (let i = 0; i < portfolioImagesAll.length; i++) {
+    portfolioImagesAll[i].classList.remove('order');
+  }
+  for (let i = 0; i < portfolioImagesGraphic.length; i++) {
+    portfolioImagesGraphic[i].classList.add('order');
+  }
+})
+
+filterButtonAll.addEventListener('click', () => {
+  for (let i = 0; i < filterButtons.length; i++) {
+    filterButtons[i].classList.remove('filter-active');
+  }
+  filterButtonAll.classList.add('filter-active');
+  for (let i = 0; i < portfolioImagesAll.length; i++) {
+    portfolioImagesAll[i].classList.remove('order');
+  }
 })

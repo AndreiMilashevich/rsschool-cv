@@ -295,9 +295,6 @@ h2 {
   padding: 5px;
   text-transform: capitalize;
   cursor: pointer; }
-  .filter:hover {
-    color: #4d7198;
-    border-color: #4d7198; }
 
 .portfolio_images {
   display: flex;
@@ -334,6 +331,13 @@ img {
 @media screen and (max-width: 768px) {
   .filter_list {
     padding-left: 30px; } }
+
+.order {
+  order: -1; }
+
+.filter-active {
+  color: #dedede;
+  border-color: #dedede; }
 
 .services {
   color: #666d89; }
