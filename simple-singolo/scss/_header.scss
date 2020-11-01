@@ -21,10 +21,6 @@ header {
 .main_menu {
   text-decoration: none;
   color: $header_text;
-
-  &:hover {
-    color: $hover-color;
-  }
 }
 
 .main_menu_v {
@@ -117,6 +113,7 @@ span {
   right: 0;
   width: 25px;
   height: 2px;
+  z-index: 251;
   background-color: $header-text;
 }
 

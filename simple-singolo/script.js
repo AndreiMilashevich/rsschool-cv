@@ -1,32 +1,51 @@
+//variables for burger menu
+
 const burgerIcon = document.querySelector('.burger');
 const mobileMenu = document.querySelector('.mobile-menu');
 const logo = document.querySelector('.logo');
 let menu = document.querySelectorAll('.menu_item_v');
 
+//variables for site's sections
+
 const servicesBlock = document.querySelector('.services');
 const portfolioBlock = document.querySelector('.portfolio');
 const headerBlock = document.querySelector('header');
 
+//variables for main menu buttons
+
 const serviceMenuButton = document.querySelector('.service-button');
 const portfolioMenuButton = document.querySelector('.portfolio-button');
-const homeMenuButton = document.querySelector('.home-button')
+const homeMenuButton = document.querySelector('.home-button');
+
+//variables for vertical menu
 
 const serviceMenuButtonVertical = document.querySelector('.service-button-vertical');
 const portfolioMenuButtonVertical = document.querySelector('.portfolio-button-vertical');
-const homeMenuButtonVertical = document.querySelector('.home-button-vertical')
+const homeMenuButtonVertical = document.querySelector('.home-button-vertical');
 
+//portfolio buttons
+
+const filterButtons = document.querySelectorAll('.filter');
 const filterButtonAll = document.querySelector('.all-button');
 const filterButtonWeb = document.querySelector('.webdesign-button');
 const filterButtonGraphic = document.querySelector('.graphicdesign-button');
 const filterButtonArt = document.querySelector('.artwork-button');
+
+//portfolio images
 
 const portfolioImagesAll = document.querySelectorAll('.image');
 const portfolioImagesWeb = document.querySelectorAll('.webdesign-image');
 const portfolioImagesGraphic = document.querySelectorAll('.graphicdesign-image');
 const portfolioImagesArt = document.querySelectorAll('.artwork-image');
 
-const filterButtons = document.querySelectorAll('.filter');
+// slider arrows
 
+const arrowLeft = document.querySelector('.arrow_left');
+const arrowRight = document.querySelector('.arrow_right');
+
+// slides
+
+const slides = document.querySelectorAll('.picture');
 
 // menu animation
 
@@ -101,15 +120,17 @@ window.addEventListener('scroll', () => {
 // scroll when click on menu button desctop
 
 serviceMenuButton.addEventListener('click', () => {
-  window.scrollTo(0, servicesBlock.offsetTop - headerBlock.offsetHeight + 1);
+  window.scrollTo({left: 0, top: servicesBlock.offsetTop - headerBlock.offsetHeight + 1, behavior: 'smooth'});
 })
 
+
+
 portfolioMenuButton.addEventListener('click', () => {
-  window.scrollTo(0, portfolioBlock.offsetTop - headerBlock.offsetHeight + 1);
+  window.scrollTo({left: 0,top: portfolioBlock.offsetTop - headerBlock.offsetHeight + 1, behavior: 'smooth'});
 })
 
 homeMenuButton.addEventListener('click', () => {
-  window.scrollTo(0, 0);
+  window.scrollTo({left: 0,top: 0, behavior: 'smooth'});
 })
 
 // scroll when click on menu button mobile
@@ -122,7 +143,7 @@ serviceMenuButtonVertical.addEventListener('click', () => {
   menu[i].classList.toggle('close');
   }
   document.body.classList.toggle('no-scroll');
-  window.scrollTo(0, servicesBlock.offsetTop - headerBlock.offsetHeight + 1);
+  window.scrollTo({left: 0, top: servicesBlock.offsetTop - headerBlock.offsetHeight + 1, behavior: 'smooth'});
 })
 
 portfolioMenuButtonVertical.addEventListener('click', () => {
@@ -133,7 +154,7 @@ portfolioMenuButtonVertical.addEventListener('click', () => {
   for(let i = 0; i < menu.length; i++) {
   menu[i].classList.toggle('close');
   }
-  window.scrollTo(0, portfolioBlock.offsetTop - headerBlock.offsetHeight + 1);
+  window.scrollTo({left: 0,top: portfolioBlock.offsetTop - headerBlock.offsetHeight + 1, behavior: 'smooth'});
 
 })
 
@@ -145,10 +166,10 @@ homeMenuButtonVertical.addEventListener('click', () => {
   for(let i = 0; i < menu.length; i++) {
   menu[i].classList.toggle('close');
   }
-  window.scrollTo(0, 0);
+  window.scrollTo({left: 0,top: 0, behavior: 'smooth'});
 })
 
-//portfolio filter
+// portfolio filter
 
 filterButtonWeb.addEventListener('click', () => {
   for (let i = 0; i < filterButtons.length; i++) {
@@ -196,5 +217,36 @@ filterButtonAll.addEventListener('click', () => {
   filterButtonAll.classList.add('filter-active');
   for (let i = 0; i < portfolioImagesAll.length; i++) {
     portfolioImagesAll[i].classList.remove('order');
+  }
+})
+
+// slider
+// wrong way
+/*
+arrowLeft.addEventListener('click', () => {
+  for (let i = 0; i < slides.length; i++) {
+    slides[i].classList.add('left');
+  }
+})
+
+arrowRight.addEventListener('click', () => {
+  for (let i = 0; i < slides.length; i++) {
+    slides[i].classList.add('right');
+  }
+})*/
+
+let num = 0;
+
+arrowLeft.addEventListener('click', () => {
+  num--;
+  for (let i = 0; i < slides.length; i++) {
+    slides[i].style.transform = `translateX(${num}00%)`;
+  }
+})
+
+arrowRight.addEventListener('click', () => {
+  num++;
+  for (let i = 0; i < slides.length; i++) {
+    slides[i].style.transform = `translateX(${num}00%)`;
   }
 })
