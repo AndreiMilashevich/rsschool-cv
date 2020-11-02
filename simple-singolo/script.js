@@ -47,9 +47,20 @@ const arrowRight = document.querySelector('.arrow_right');
 
 const slides = document.querySelectorAll('.picture');
 let position = 0;
-let firstSlidePosition = slides[0].offsetLeft;
-let lastSlidePosition = slides[slides.length - 1].offsetLeft;
-console.log(lastSlidePosition);
+//let firstSlidePosition = slides[0].offsetLeft;
+//let lastSlidePosition = slides[slides.length - 1].offsetLeft;
+var visibleSlideIndex = 0;
+
+const foo = () => {
+  for (let i = 0; i < slides.length; i++)
+  if (slides[i].offsetLeft === 0) {
+     visibleSlideIndex = i;
+    //console.log(visibleSlideIndex);
+    return visibleSlideIndex;
+    }
+};
+
+foo ();
 
 // menu animation
 
@@ -242,28 +253,27 @@ arrowRight.addEventListener('click', () => {
 const slideMove = () => {
   for (let i = 0; i < slides.length; i++) {
   slides[i].style.transform = `translateX(${position}00%)`;
-}};
-
-
-
+  console.log('click');
+}
+};
 
 arrowLeft.addEventListener('click', () => {
-  if (position === -1) {
-   position = 2;
+  console.log(position);
+  if (position ===  -visibleSlideIndex) {
+  position = slides.length - visibleSlideIndex;
+  slidesMove();
   } else {
-   position--;
-   slideMove();
+    position--;
+    slideMove();
   }
-})
+});
 
 arrowRight.addEventListener('click', () => {
-  if (position === (slides.length - 2)) {
-    position = -1;
-    slideMove();
-  } else {
-  position++;
+  if (position === (slides.length  - 1 ) - visibleSlideIndex) {
+  position = - visibleSlideIndex;
   slideMove();
+  } else {
+    position++;
+    slideMove();
 }
-})
-
-
+});
