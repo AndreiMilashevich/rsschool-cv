@@ -516,6 +516,7 @@ h3 {
   position: absolute;
   height: 100%;
   background-image: url("../images/Slider.svg");
+  background-size: 100%;
   left: 100%;
   flex: 0 0 100%;
   width: 100%;
@@ -526,6 +527,7 @@ h3 {
   position: absolute;
   height: 100%;
   background-image: url("../images/Slider.svg");
+  background-size: 100%;
   right: 100%;
   flex: 0 0 100%;
   width: 100%;

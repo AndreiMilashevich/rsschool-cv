@@ -46,6 +46,10 @@ const arrowRight = document.querySelector('.arrow_right');
 // slides
 
 const slides = document.querySelectorAll('.picture');
+let position = 0;
+let firstSlidePosition = slides[0].offsetLeft;
+let lastSlidePosition = slides[slides.length - 1].offsetLeft;
+console.log(lastSlidePosition);
 
 // menu animation
 
@@ -235,18 +239,31 @@ arrowRight.addEventListener('click', () => {
   }
 })*/
 
-let num = 0;
+const slideMove = () => {
+  for (let i = 0; i < slides.length; i++) {
+  slides[i].style.transform = `translateX(${position}00%)`;
+}};
+
+
+
 
 arrowLeft.addEventListener('click', () => {
-  num--;
-  for (let i = 0; i < slides.length; i++) {
-    slides[i].style.transform = `translateX(${num}00%)`;
+  if (position === -1) {
+   position = 2;
+  } else {
+   position--;
+   slideMove();
   }
 })
 
 arrowRight.addEventListener('click', () => {
-  num++;
-  for (let i = 0; i < slides.length; i++) {
-    slides[i].style.transform = `translateX(${num}00%)`;
-  }
+  if (position === (slides.length - 2)) {
+    position = -1;
+    slideMove();
+  } else {
+  position++;
+  slideMove();
+}
 })
+
+
