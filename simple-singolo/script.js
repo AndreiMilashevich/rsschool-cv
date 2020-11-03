@@ -47,20 +47,6 @@ const arrowRight = document.querySelector('.arrow_right');
 
 const slides = document.querySelectorAll('.picture');
 let position = 0;
-//let firstSlidePosition = slides[0].offsetLeft;
-//let lastSlidePosition = slides[slides.length - 1].offsetLeft;
-var visibleSlideIndex = 0;
-
-const foo = () => {
-  for (let i = 0; i < slides.length; i++)
-  if (slides[i].offsetLeft === 0) {
-     visibleSlideIndex = i;
-    //console.log(visibleSlideIndex);
-    return visibleSlideIndex;
-    }
-};
-
-foo ();
 
 // menu animation
 
@@ -95,7 +81,7 @@ window.addEventListener('scroll', () => {
 })
 
 window.addEventListener('scroll', () => {
-  let scrollDistance = window.scrollY;
+  let scrollDistance = window.pageYOffset;
   if (scrollDistance < servicesBlock.offsetTop - headerBlock.offsetHeight) {
     homeMenuButton.classList.add('active');
   } else {
@@ -253,27 +239,25 @@ arrowRight.addEventListener('click', () => {
 const slideMove = () => {
   for (let i = 0; i < slides.length; i++) {
   slides[i].style.transform = `translateX(${position}00%)`;
-  console.log('click');
-}
+  }
 };
 
 arrowLeft.addEventListener('click', () => {
-  console.log(position);
-  if (position ===  -visibleSlideIndex) {
-  position = slides.length - visibleSlideIndex;
-  slidesMove();
-  } else {
-    position--;
+  if (position === 0) {
+    position = -(slides.length - 1);
     slideMove();
-  }
+  } else {
+position++;
+slideMove();
+}
 });
 
 arrowRight.addEventListener('click', () => {
-  if (position === (slides.length  - 1 ) - visibleSlideIndex) {
-  position = - visibleSlideIndex;
-  slideMove();
-  } else {
-    position++;
+  if (position === -(slides.length - 1)) {
+    position = 0;
     slideMove();
+  } else {
+position--;
+slideMove();
 }
 });

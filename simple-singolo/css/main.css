@@ -526,9 +526,19 @@ h3 {
 .phones_3 {
   position: absolute;
   height: 100%;
+  background-image: url("../images/Slider_1.svg");
+  background-size: 100%;
+  left: 200%;
+  flex: 0 0 100%;
+  width: 100%;
+  display: block; }
+
+.phones_4 {
+  position: absolute;
+  height: 100%;
   background-image: url("../images/Slider.svg");
   background-size: 100%;
-  right: 100%;
+  left: 300%;
   flex: 0 0 100%;
   width: 100%;
   display: block; }
