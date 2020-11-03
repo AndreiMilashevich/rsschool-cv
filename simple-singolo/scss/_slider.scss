@@ -111,10 +111,10 @@
 }
 
 .arrow_left {
+  position: absolute;
   width: 16px;
   height: 27px;
   background: url('../images/arrow-left.svg') no-repeat;
-  position: absolute;
   top: 283px;
   left: 40px;
   cursor: pointer;

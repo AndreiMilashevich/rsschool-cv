@@ -162,7 +162,7 @@ span {
   list-style: none;
   text-transform: uppercase;
   left: 10%;
-  top: 30%;
+  top: 25%;
   font-size: 2.4rem;
   padding-top: 10px; }
 
@@ -544,10 +544,10 @@ h3 {
   display: block; }
 
 .arrow_left {
+  position: absolute;
   width: 16px;
   height: 27px;
   background: url("../images/arrow-left.svg") no-repeat;
-  position: absolute;
   top: 283px;
   left: 40px;
   cursor: pointer; }

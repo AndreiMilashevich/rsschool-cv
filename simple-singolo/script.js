@@ -48,6 +48,26 @@ const arrowRight = document.querySelector('.arrow_right');
 const slides = document.querySelectorAll('.picture');
 let position = 0;
 
+
+/*const mediaQuery = window.matchMedia('(max-width: 768px');
+if (mediaQuery.matches) {
+}*/
+
+function debounce(func, wait, immediate) {
+	var timeout;
+	return function() {
+		var context = this, args = arguments;
+		var later = function() {
+			timeout = null;
+			if (!immediate) func.apply(context, args);
+		};
+		var callNow = immediate && !timeout;
+		clearTimeout(timeout);
+		timeout = setTimeout(later, wait);
+		if (callNow) func.apply(context, args);
+	};
+};
+
 // menu animation
 
 burgerIcon.addEventListener('click', () => {
@@ -62,35 +82,23 @@ burgerIcon.addEventListener('click', () => {
 
 // buttons become active when scrolling desctop
 
-window.addEventListener('scroll', () => {
+const becomeActive = () => {
   let scrollDistance = window.pageYOffset;
+  portfolioMenuButton.classList.remove('active');
+  homeMenuButton.classList.remove('active');
   if (scrollDistance >= servicesBlock.offsetTop - headerBlock.offsetHeight && scrollDistance + headerBlock.offsetHeight < portfolioBlock.offsetTop) {
     serviceMenuButton.classList.add('active');
-  } else {
-    serviceMenuButton.classList.remove('active');
-  }
-})
-
-window.addEventListener('scroll', () => {
-  let scrollDistance = window.pageYOffset;
+  } else {serviceMenuButton.classList.remove('active');}
   if (scrollDistance >= portfolioBlock.offsetTop - headerBlock.offsetHeight && scrollDistance  <= portfolioBlock.offsetTop + portfolioBlock.offsetHeight) {
     portfolioMenuButton.classList.add('active');
-  } else {
-    portfolioMenuButton.classList.remove('active');
   }
-})
-
-window.addEventListener('scroll', () => {
-  let scrollDistance = window.pageYOffset;
   if (scrollDistance < servicesBlock.offsetTop - headerBlock.offsetHeight) {
     homeMenuButton.classList.add('active');
-  } else {
-    homeMenuButton.classList.remove('active');
   }
-})
+}
 
 // buttons become active when scrolling mobile
-
+/*
 window.addEventListener('scroll', () => {
   let scrollDistance = window.pageYOffset;
   if (scrollDistance >= servicesBlock.offsetTop - headerBlock.offsetHeight && scrollDistance + headerBlock.offsetHeight < portfolioBlock.offsetTop) {
@@ -117,7 +125,7 @@ window.addEventListener('scroll', () => {
     homeMenuButtonVertical.classList.remove('active');
   }
 })
-
+*/
 // scroll when click on menu button desctop
 
 serviceMenuButton.addEventListener('click', () => {
@@ -261,3 +269,5 @@ position--;
 slideMove();
 }
 });
+
+window.addEventListener('scroll', debounce(becomeActive, 400));
