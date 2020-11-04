@@ -60,7 +60,7 @@ h2 {
     display: block;
   }
 
-  @media screen and (max-width: $desctop) {
+  @media screen and (max-width: $desktop) {
     padding: 6px;
     width: calc(33% - 20px);
   }

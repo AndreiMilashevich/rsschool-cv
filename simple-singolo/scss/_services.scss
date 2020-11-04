@@ -9,7 +9,7 @@
   text-align: justify;
   padding: 42px 40px 52px;
 
-  @media screen and (max-width: $desctop) {
+  @media screen and (max-width: $desktop) {
     justify-content: space-around;
     padding-right: 0;
   }
@@ -57,7 +57,7 @@ h3 {
   position: relative;
   margin-bottom: 20px;
 
-  @media screen and (max-width: $desctop) {
+  @media screen and (max-width: $desktop) {
     padding-right: 25px;
     width: calc((100% - 100px) / 3);
   }

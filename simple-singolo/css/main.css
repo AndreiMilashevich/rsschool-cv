@@ -192,6 +192,9 @@ footer {
   flex-direction: row;
   padding: 22px 42px; }
 
+.social_icon {
+  margin-left: 8px; }
+
 .footer {
   display: flex;
   flex-direction: row;
@@ -208,58 +211,54 @@ footer {
     .copyright {
       display: none; } }
 
-.facebook_link {
+.link_facebook {
   width: 32px;
   height: 33px;
-  background: url("../images/css_sprites.png") -250px -169px;
-  margin-left: 8px; }
-  .facebook_link:hover {
+  background: url("../images/css_sprites.png") -250px -169px; }
+  .link_facebook:hover {
     width: 32px;
     height: 33px;
     background: url("../images/css_sprites.png") -166px -170px; }
-  .facebook_link:active {
+  .link_facebook:active {
     width: 32px;
     height: 33px;
     background: url("../images/css_sprites.png") -166px -223px; }
 
-.google_link {
+.link_google {
   width: 32px;
   height: 33px;
-  background: url("../images/css_sprites.png") -250px -116px;
-  margin-left: 8px; }
-  .google_link:hover {
+  background: url("../images/css_sprites.png") -250px -116px; }
+  .link_google:hover {
     width: 32px;
     height: 33px;
     background: url("../images/css_sprites.png") -114px -170px; }
-  .google_link:active {
+  .link_google:active {
     width: 32px;
     height: 33px;
     background: url("../images/css_sprites.png") -114px -223px; }
 
-.twitter_link {
+.link_twitter {
   width: 32px;
   height: 33px;
-  background: url("../images/css_sprites.png") -250px -63px;
-  margin-left: 8px; }
-  .twitter_link:hover {
+  background: url("../images/css_sprites.png") -250px -63px; }
+  .link_twitter:hover {
     width: 32px;
     height: 33px;
     background: url("../images/css_sprites.png") -62px -170px; }
-  .twitter_link:active {
+  .link_twitter:active {
     width: 32px;
     height: 33px;
     background: url("../images/css_sprites.png") -62px -223px; }
 
-.linkedin_link {
+.link_linkedin {
   width: 32px;
   height: 33px;
-  background: url("../images/css_sprites.png") -250px -10px;
-  margin-left: 8px; }
-  .linkedin_link:hover {
+  background: url("../images/css_sprites.png") -250px -10px; }
+  .link_linkedin:hover {
     width: 32px;
     height: 33px;
     background: url("../images/css_sprites.png") -10px -170px; }
-  .linkedin_link:active {
+  .link_linkedin:active {
     width: 32px;
     height: 33px;
     background: url("../images/css_sprites.png") -10px -223px; }

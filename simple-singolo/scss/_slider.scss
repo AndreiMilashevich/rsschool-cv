@@ -22,7 +22,7 @@
   width: 216px;
   padding: 54px 24px 88px 112px;
 
-  @media screen and (max-width: $desctop) {
+  @media screen and (max-width: $desktop) {
     height: 344px;
     width: 162px;
     background: url('../images/phone-vertical-display.png') 90px 89px  no-repeat, url('../images/phone-vertical.svg')  80px 40px no-repeat, url('../images/phone-vertical-shadow.png') 82px 42px no-repeat;
@@ -45,7 +45,7 @@
   width: 458px;
   padding: 177px 137px 207px 0;
 
-  @media screen and (max-width: $desctop) {
+  @media screen and (max-width: $desktop) {
     height: 162px;
     width: 344px;
     background: url('../images/phone-horizontal-display.png') 45px 143px  no-repeat, url('../images/phone-horizontal.svg')  0 133px no-repeat, url('../images/phone-horizontal-shadow.png') 0 133px no-repeat;
@@ -71,7 +71,7 @@
   max-width: 100%;
   transition: 1s;
 
-  @media screen and (max-width: $desctop) {
+  @media screen and (max-width: $desktop) {
     justify-content: space-around;
   }
 }
@@ -119,7 +119,7 @@
   left: 40px;
   cursor: pointer;
 
-  @media screen and (max-width: $desctop) {
+  @media screen and (max-width: $desktop) {
     top: 212px;
     left: 29px;
   }
@@ -139,7 +139,7 @@
   right: 40px;
   cursor: pointer;
 
-  @media screen and (max-width: $desctop) {
+  @media screen and (max-width: $desktop) {
     top: 212px;
     right: 29px;
   }
