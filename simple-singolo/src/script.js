@@ -48,6 +48,8 @@ const arrowRight = document.querySelector('.arrow_right');
 const slides = document.querySelectorAll('.picture');
 let position = 0;
 
+// debounce
+
 function debounce(func, wait, immediate) {
 	let timeout;
 	return function() {
@@ -65,7 +67,7 @@ function debounce(func, wait, immediate) {
 
 // menu animation
 
-burgerIcon.addEventListener('click', () => {
+const toggleMobileMenu = () => {
   burgerIcon.classList.toggle('rotate');
   mobileMenu.classList.toggle('close');
   logo.classList.toggle('move-left');
@@ -73,9 +75,11 @@ burgerIcon.addEventListener('click', () => {
     menu[i].classList.toggle('close');
   }
   document.body.classList.toggle('no-scroll');
-})
+}
 
-// buttons become active when scrolling desctop
+
+
+// buttons become active when scrolling desktop
 
 const setButtonsActive = () => {
   let scrollDistance = window.pageYOffset;
@@ -92,7 +96,7 @@ const setButtonsActive = () => {
   }
 }
 
-// scroll when click on menu button desctop
+// scroll when click on menu button desktop
 
 serviceMenuButton.addEventListener('click', () => {
   window.scrollTo({left: 0, top: servicesBlock.offsetTop - headerBlock.offsetHeight + 1, behavior: 'smooth'});
@@ -105,16 +109,13 @@ portfolioMenuButton.addEventListener('click', () => {
 homeMenuButton.addEventListener('click', () => {
   window.scrollTo({left: 0,top: 0, behavior: 'smooth'});
 })
-const toggleMobileMenu = () => {
-  burgerIcon.classList.toggle('rotate');
-  mobileMenu.classList.toggle('close');
-  logo.classList.toggle('move-left');
-  for(let i = 0; i < menu.length; i++) {
-    menu[i].classList.toggle('close');
-  }
-  document.body.classList.toggle('no-scroll');
-}
-// scroll when click on menu button mobile
+
+
+// mobile menu events
+
+burgerIcon.addEventListener('click', () => {
+  toggleMobileMenu();
+})
 
 serviceMenuButtonVertical.addEventListener('click', () => {
   toggleMobileMenu();
