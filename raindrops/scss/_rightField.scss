@@ -30,9 +30,34 @@
     margin: auto;
     border-radius: 5px 5px 0 0;
   }
+
+  &_controls {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 90%;
+    height: 5%;
+    background-color: $keyboard-border-color;
+    box-shadow: 0 5px 5px 2px $shadow-color;
+
+    &_music {
+
+    }
+
+    &_sound {
+
+    }
+
+    &_quit {
+
+    }
+  }
 }
 
 .score {
+  -webkit-user-select: none;
+
   &::before {
     position: absolute;
     content: '';
@@ -49,26 +74,41 @@
 }
 
 .answer {
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   height: 33%;
   background-color: $display-color;
   border-radius: 5px 5px 0 0;
+
+  &_value {
+    font-size: 3rem;
+    font-weight: bold;
+    -webkit-user-select: none;
+    text-overflow: clip;
+  }
 }
 
 .button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 33%;
   height: 25%;
   border: 1px solid grey;
   box-sizing: border-box;
   background-color: $button-color;
-  text-align: center;
   font-size: 3.2rem;
   font-weight: bold;
+  cursor: pointer;
+  -webkit-user-select: none;
 
   &_text {
     font-size: 1rem;
-    vertical-align: middle;
     font-weight: bold;
+
   }
 
   &_wide {
@@ -98,10 +138,21 @@
   &_tall {
     width: 100%;
     height: 50%;
+  }
+
+  &_controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+    height: 90%;
     border: 1px solid grey;
     box-sizing: border-box;
     background-color: $button-color;
-    text-align: center;
-    align-content: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    -webkit-user-select: none;
+    border-radius: 5px;
   }
 }
