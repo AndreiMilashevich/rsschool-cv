@@ -21,7 +21,7 @@
     background-color: $keyboard-border-color;
     margin: 80px auto;
     box-shadow: 0 5px 5px 2px $shadow-color;
-      }
+  }
 
   &_enter {
     width: calc(100% - 20px);
@@ -40,7 +40,7 @@
     background-size: cover;
     width: 30px;
     height: 30px;
-    background-image: url('/raindrops/images/star-svgrepo-com.svg');
+    background-image: url('../images/star-svgrepo-com.svg');
   }
 
   &_value {
