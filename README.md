@@ -1,1 +1,1 @@
- https://andreimilashevich.github.io/rsschool-cv/
+ https://andreimilashevich.github.io/rsschool-cv/raindrops/index
