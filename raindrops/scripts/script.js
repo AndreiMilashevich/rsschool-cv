@@ -12,9 +12,9 @@ let max = 80;
 let scoreValue = document.querySelector('.score_value');
 let score = 0;
 let multOperator = true;
-let dropStep = 0;
-
-
+let dropStep =  1;
+let interval = 10000;
+let audioSplash = document.querySelector('.splash');
 
 scoreValue.textContent = score;
 
@@ -66,7 +66,6 @@ function dropCreate() {
 
   function exampleCheck() {
     if (o === '÷' && (first % two !== 0)) {
-      console.log('do not divide');
       two = second();
       exampleCheck();
     }
@@ -94,27 +93,79 @@ function dropCreate() {
   numberWrapper.append(firstNumber, secondNumber);
   drop.append(operator, numberWrapper);
   dropField.append(drop);
+  setTimeout(dropCreate, interval);
 }
-
-dropCreate();
-dropCreate();
-dropCreate();
-dropCreate();
 dropCreate();
 
 function dropsMove() {
   setTimeout( () => {
     let drops = document.querySelectorAll('.drop');
     drops.forEach(function(item) {
-      let position = item.offsetTop;
-      item.style.top = `${position + dropStep}px`;
+      item.style.top = `${item.offsetTop + dropStep}px`;
     })
     dropsMove();
+    dropsRemove()
   },40);
 
 }
 
-dropsMove(dropStep);
+dropsMove();
+
+function dropsRemove() {
+  setTimeout( () => {
+    let drops;
+    drops = document.querySelectorAll('.drop');
+    if (drops[0].offsetTop >= dropField.offsetHeight) {
+      drops.forEach((el) => {
+        let itemPositionX = el.offsetLeft;
+        let itemPositionY = el.offsetTop;
+        el.classList.remove('drop');
+        el.textContent = '';
+        el.classList.add('splash');
+        audioSplash.currentTime = 0;
+        audioSplash.play();
+        el.style.top = `${itemPositionY - 10}px`;
+        el.style.left = `${itemPositionX - 30}px`;
+        setTimeout(() => {el.remove()}, 100);
+      });
+
+    }
+    dropsRemove();
+  },1000);
+}
+
+function addSplash() {
+  el.classList.remove('drop');
+  el.classList.add('splash');
+}
+
+enterButton.addEventListener('click', () => {
+  let playerAnswer = answerBoard.textContent;
+  let op= document.querySelector('.drop_operator').textContent;
+  let first = document.querySelector('.drop_number_one').textContent;
+  let second = document.querySelector('.drop_number_two').textContent;
+  let answer;
+  switch(op) {
+    case('+'):
+      answer = +first + +second;
+      break;
+    case('-'):
+      answer = +first - +second;
+      break;
+    case('÷'):
+      answer = +first / +second;
+      break;
+    case('×'):
+      answer = +first * +second;
+      break;
+  }
+  if (answer == playerAnswer) {
+    score = score + 10;
+    scoreValue.textContent = score;
+  }
+
+  })
+
 
 
 

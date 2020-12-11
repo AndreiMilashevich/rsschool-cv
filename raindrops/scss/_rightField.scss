@@ -105,6 +105,10 @@
   cursor: pointer;
   -webkit-user-select: none;
 
+  &:hover {
+    background-color: $display-color;
+  }
+
   &_text {
     font-size: 1rem;
     font-weight: bold;
@@ -154,5 +158,9 @@
     cursor: pointer;
     -webkit-user-select: none;
     border-radius: 5px;
+
+    &:hover {
+      background-color: $display-color;
+    }
   }
 }

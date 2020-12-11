@@ -44,10 +44,11 @@
   left: 100px;
   justify-content: center;
   align-items: center;
+  z-index: 2;
 
-  &_contaner {
+  &_container {
     width: 100%;
-    height: 75%;
+    height: 75vh;
   }
 
   &_item {
@@ -67,4 +68,14 @@
   bottom: 0;
   width: 100%;
   height: 25%;
+}
+
+.splash {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  background-image: url('../images/splash.png');
+  background-size: 100% 100%;
+  transition: all 0.1s;
+  z-index: 2;
 }
