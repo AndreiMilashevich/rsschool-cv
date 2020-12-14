@@ -8,6 +8,13 @@
   </head>
   <body>
     <div class="container">
+      <div class="page page_start">
+        <h1>Raindrops</h1>
+        <p class="page_start_text">it's raining numbers! Solve the equations before they fill the lake.</p>
+        <button class="button_guide">How to play</button>
+        <button class="button_play">Play</button>
+      </div>
+      <div class=" page_end"></div>
       <div class="field_plaing">
        <div class="drop_container"></div>
         <div class="rock"></div>
@@ -35,27 +42,27 @@
             <div class="answer"><span class="answer_value"></span></div>
             <div class="buttons_wrapper">
               <div class="buttons_left">
-                <div class="button number"><span>7</span></div>
-                <div class="button number"><span>8</span></div>
-                <div class="button number"><span>9</span></div>
-                <div class="button number"><span>4</span></div>
-                <div class="button number"><span>5</span></div>
-                <div class="button number"><span>6</span></div>
-                <div class="button number"><span>1</span></div>
-                <div class="button number"><span>2</span></div>
-                <div class="button number"><span>3</span></div>
-                <div class="button button_wide number">0</div>
-                <div class="button delete">
+                <button class="button number" data-key="103" data-key2="55"><span>7</span></button>
+                <button class="button number" data-key="104" data-key2="56"><span>8</span></button>
+                <button class="button number" data-key="105" data-key2="57"><span>9</span></button>
+                <button class="button number" data-key="100" data-key2="52"><span>4</span></button>
+                <button class="button number" data-key="101" data-key2="53"><span>5</span></button>
+                <button class="button number" data-key="102" data-key2="54"><span>6</span></button>
+                <button class="button number" data-key="97" data-key2="49"><span>1</span></button>
+                <button class="button number" data-key="98" data-key2="50"><span>2</span></button>
+                <button class="button number" data-key="99" data-key2="51"><span>3</span></button>
+                <button class="button button_wide number" data-key="96" data-key2="48">0</button>
+                <button class="button delete" data-key="8">
                   <span class="button_text ">Delete</span>
-                </div>
+                </button>
               </div>
               <div class="buttons_right">
-                <div class="button button_tall clear">
+                <button class="button button_tall clear" data-key="46">
                   <span class="button_text">Clear</span>
-                </div>
-                <div class="button button_tall enter">
+                </button>
+                <button class="button button_tall enter" data-key="13">
                   <span class="button_text">Enter</span>
-                </div>
+                </button>
               </div>
             </div>
           </div>
@@ -67,7 +74,8 @@
         </div>
       </div>
     </div>
-    <audio src="/raindrops/sounds/splash.ogg" class="splash"></audio>
+    <audio src="../sounds/splash.ogg" class="splash"></audio>
+    <audio src="../sounds/rain.ogg" class="rain" loop></audio>
     <script src="build/main.js"></script>
   </body>
 </html>

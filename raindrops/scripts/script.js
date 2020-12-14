@@ -5,34 +5,72 @@ const clearButton = document.querySelector('.clear');
 const deleteButton = document.querySelector('.delete');
 const dropField = document.querySelector('.drop_container');
 const enterButton = document.querySelector('.enter');
-let numberButtons = document.querySelectorAll('.number');
+const playButton = document.querySelector('.button_play');
+const numberButtons = document.querySelectorAll('.number');
+const startPage = document.querySelector('.page_start');
 let answerValue = '';
 let min = 1;
-let max = 80;
+let max = 20;
 let scoreValue = document.querySelector('.score_value');
 let score = 0;
 let multOperator = true;
 let dropStep =  1;
 let interval = 10000;
 let audioSplash = document.querySelector('.splash');
+let playGame = false;
 
 scoreValue.textContent = score;
 
-numberButtons.forEach(function(item, idx) {
-  item.addEventListener('click', function() {
-    answerBoard.textContent += numberButtons[idx].textContent;
-  })
-})
+playButton.addEventListener('click', play);
 
-clearButton.addEventListener('click', function() {
+function play() {
+  startPage.style.top = "100%";
+  playGame = true;
+}
+
+function numberInput(e) {
+  const key = document.querySelector(`div[data-key="${e.keyCode}"]`);
+  const key2 = document.querySelector(`div[data-key2="${e.keyCode}"]`);
+  if (this.textContent) {
+    answerBoard.textContent += this.textContent;
+  } else if (key) {
+    if (e.keyCode === 13) {
+      answerCheck();
+      return;
+    } else if (e.keyCode === 46) {
+      clear();
+      return;
+    } else if (e.keyCode === 8) {
+      backspace();
+      return;
+    }
+  } else if (key) {
+  answerBoard.textContent += key.textContent;
+  }  else if (key2) {
+    answerBoard.textContent += key2.textContent;
+  }
+}
+
+function clear() {
   answerBoard.textContent = '';
+}
+
+function backspace() {
+  answerBoard.textContent = answerBoard.textContent.slice(0, - 1);
+}
+
+numberButtons.forEach(function(item) {
+  item.addEventListener('click', numberInput)
 })
 
-deleteButton.addEventListener('click', function() {
-  answerBoard.textContent = answerBoard.textContent.slice(0, - 1);
-})
+window.addEventListener('keydown', numberInput)
+
+clearButton.addEventListener('click', clear)
+
+deleteButton.addEventListener('click', backspace)
 
 function dropCreate() {
+  if (playGame) {
   let dropPositionX = Math.random() * (dropField.offsetWidth - 200) + 100;
   let first = Math.floor(Math.random() * (max - min) + min);
   let second = () => Math.floor(Math.random() * (first - min) + min);
@@ -59,7 +97,6 @@ function dropCreate() {
     }
     return
   };
-
 
   let two = second();
   let o = op()
@@ -95,6 +132,8 @@ function dropCreate() {
   dropField.append(drop);
   setTimeout(dropCreate, interval);
 }
+}
+
 dropCreate();
 
 function dropsMove() {
@@ -106,42 +145,26 @@ function dropsMove() {
     dropsMove();
     dropsRemove()
   },40);
-
 }
 
 dropsMove();
 
 function dropsRemove() {
   setTimeout( () => {
-    let drops;
-    drops = document.querySelectorAll('.drop');
+    let drops = document.querySelectorAll('.drop');
     if (drops[0].offsetTop >= dropField.offsetHeight) {
-      drops.forEach((el) => {
-        let itemPositionX = el.offsetLeft;
-        let itemPositionY = el.offsetTop;
-        el.classList.remove('drop');
-        el.textContent = '';
-        el.classList.add('splash');
-        audioSplash.currentTime = 0;
-        audioSplash.play();
-        el.style.top = `${itemPositionY - 10}px`;
-        el.style.left = `${itemPositionX - 30}px`;
-        setTimeout(() => {el.remove()}, 100);
-      });
-
+      for (let i = 0; i < drops.length; i++) {
+        removeOneDrop(drops[i]);
+      }
     }
     dropsRemove();
   },1000);
 }
 
-function addSplash() {
-  el.classList.remove('drop');
-  el.classList.add('splash');
-}
-
-enterButton.addEventListener('click', () => {
+function answerCheck() {
   let playerAnswer = answerBoard.textContent;
-  let op= document.querySelector('.drop_operator').textContent;
+  let drop = document.querySelector('.drop');
+  let op = document.querySelector('.drop_operator').textContent;
   let first = document.querySelector('.drop_number_one').textContent;
   let second = document.querySelector('.drop_number_two').textContent;
   let answer;
@@ -159,14 +182,33 @@ enterButton.addEventListener('click', () => {
       answer = +first * +second;
       break;
   }
-  if (answer == playerAnswer) {
+  if (answer == playerAnswer && playerAnswer !== '') {
     score = score + 10;
     scoreValue.textContent = score;
+    removeOneDrop(drop);
+  } else {
+    score = score - 5;
+    scoreValue.textContent = score;
+    drop.classList.add('drop_wrong');
+    setTimeout(() => {drop.classList.remove('drop_wrong')}, 200)
   }
+  answerBoard.textContent = '';
+}
 
-  })
+enterButton.addEventListener('click', answerCheck)
 
-
+function removeOneDrop(drop) {
+  let itemPositionX = drop.offsetLeft;
+  let itemPositionY = drop.offsetTop;
+  drop.classList.remove('drop');
+  drop.textContent = '';
+  drop.classList.add('splash');
+  audioSplash.currentTime = 0;
+  audioSplash.play();
+  drop.style.top = `${itemPositionY - 10}px`;
+  drop.style.left = `${itemPositionX - 30}px`;
+  setTimeout(() => {drop.remove()}, 100);
+}
 
 
 

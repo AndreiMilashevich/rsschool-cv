@@ -1,0 +1,24 @@
+.page {
+  z-index: 1;
+  width: 100%;
+  position: absolute;
+  height: 100vh;
+  text-align: center;
+
+  &_start {
+    background: url('/raindrops/images/drops.png') no-repeat center, linear-gradient($left-back-color-top 0, $left-back-color-bottom 80%);
+    background-size: 30%;
+
+    &_text {
+      font-size: 1.5rem;
+    }
+
+    &_end {
+      z-index: -1;
+    }
+  }
+}
+
+h1 {
+  font-size: 3rem;
+}
