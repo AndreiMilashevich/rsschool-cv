@@ -1,39 +1,49 @@
 import '../scss/index.scss';
-
+// fields
+const dropField = document.querySelector('.drop_container');
+const startPage = document.querySelector('.page_start');
 const answerBoard = document.querySelector('.answer_value');
+let scoreValue = document.querySelector('.score_value');
+let wave  = document.querySelector('.wave');
+
+// buttons
 const clearButton = document.querySelector('.clear');
 const deleteButton = document.querySelector('.delete');
 const quitButton = document.querySelector('.box_controls_quit');
 const soundButton = document.querySelector('.box_controls_sound');
-const dropField = document.querySelector('.drop_container');
 const enterButton = document.querySelector('.enter');
 const playButton = document.querySelector('.button_play');
 const numberButtons = document.querySelectorAll('.number');
-const startPage = document.querySelector('.page_start');
+const multOperator = document.querySelector('.checkbox_mult');
+
+// sounds
 const sound = document.querySelector('.rain');
 const audioSplash = document.querySelector('.splash');
 const audioAlert = document.querySelector('.alert');
+
+// statistics DOM
 const finalScore = document.querySelector('.final_score');
 const finalAnswersCount = document.querySelector('.final_answers');
 const finalRightAnswersCount = document.querySelector('.final_answers_right');
 const finalAccuracy = document.querySelector('.final_accuracy');
 const stat = document.querySelector('.statistics');
-const multOperator = document.querySelector('.checkbox_mult');
+
+// statistics variables
 let answersCount = 0;
 let rightAnswersCount = 0;
 let accuracy = 0;
-let min = 1;
-let max = 5;
-let scoreValue = document.querySelector('.score_value');
-let score = 0;
-let scoreStep = 10;
-let dropStep;
-let bonusPeriod = 20;
+
+//service variables
+let min = 1; // min value in expression
+let max = 5; //max value in expression
+let score = 0; //score
+let scoreStep = 10; //score increment
+let dropStep; // how much drop move per iteration
+let bonusPeriod = 20; // how often bonus drop shows
 let dropCount = 0;
-
-let interval = 3000;
-
+let interval = 3000; // time interval between drops
 let playGame = false;
+let notCatchCount = 0;
 
 playButton.addEventListener('click', startGame);
 quitButton.addEventListener('click', stopGame);
@@ -74,6 +84,7 @@ function startGame() {
   playGame = true;
   dropCreate();
   sound.play();
+  sound.volume = 0.2;
   dropsMove();
   score = 0;
   answersCount = 0;
@@ -84,6 +95,7 @@ function startGame() {
   dropStep = 1;
 }
 
+// enter answer
 function numberInput(e) {
   const key = document.querySelector(`div[data-key="${e.keyCode}"]`);
   const key2 = document.querySelector(`div[data-key2="${e.keyCode}"]`);
@@ -129,7 +141,7 @@ function dropCreate() {
   dropCount++
   if (playGame) {
   let dropPositionX = Math.random() * (dropField.offsetWidth - 200) + 100;
-  let first = Math.floor(Math.random() * (max - min) + min);
+  let first = Math.floor(Math.random() * (max - min) + min); //first number in expression
   let second = () => Math.floor(Math.random() * (first - min) + min);
 
   let op = () => {
@@ -156,8 +168,9 @@ function dropCreate() {
   };
 
   let two = second();
-  let o = op()
+  let o = op();
 
+  //check can divide or not
   function exampleCheck() {
     if (o === '÷' && (first % two !== 0)) {
       two = second();
@@ -167,6 +180,7 @@ function dropCreate() {
 
   exampleCheck();
 
+  //create drops in DOM
   let drop = document.createElement('div');
   let firstNumber = document.createElement('span');
   let secondNumber = document.createElement('span');
@@ -195,7 +209,7 @@ function dropCreate() {
 }
 
 function dropsMove() {
-  dropStep =  Math.floor(score/200) + 1;
+  dropStep =  Math.floor(score/200) + 1; //change drop's speed
   setTimeout( () => {
     let drops = document.querySelectorAll('.drop');
     drops.forEach(function(item) {
@@ -205,12 +219,11 @@ function dropsMove() {
       dropsMove();
       dropsRemove()
     }
-  },40);
+  },40); // because need 25 frames per second.
 }
 
 function dropsRemove() {
-
-    if (playGame) {
+  if (playGame) {
     let drops = document.querySelectorAll('.drop');
     if (drops.length === 0) {
       return
@@ -219,6 +232,15 @@ function dropsRemove() {
       for (let i = 0; i < drops.length; i++) {
         removeOneDrop(drops[i]);
       }
+      notCatchCount++;
+      if (notCatchCount === 1) {
+        wave.style.height = '35%';
+      } else if (notCatchCount === 2) {
+        wave.style.height = '45%';
+      }
+      if (notCatchCount >= 3) {
+        stopGame();
+      }
     }
   } else {
     return
@@ -226,7 +248,7 @@ function dropsRemove() {
 }
 
 function answerCheck() {
-  max++;
+  max++; //increment expression's difficult
   let playerAnswer = answerBoard.textContent;
   let drop = document.querySelector('.drop');
   let op = document.querySelector('.drop_operator').textContent;
@@ -269,11 +291,13 @@ function answerCheck() {
     if (score < 0) {
     stopGame();
   } else {
+    audioAlert.currentTime = 0;
+    audioAlert.volume = 1;
+    audioAlert.play(); // error
     drop.classList.add('drop_wrong');
     setTimeout(() => {drop.classList.remove('drop_wrong')}, 200)
   }
 }
-
   answerBoard.textContent = '';
 }
 
@@ -288,9 +312,9 @@ function removeOneDrop(drop) {
   drop.classList.add('splash');
   audioSplash.currentTime = 0;
   if (!sound.paused) {
+    audioSplash.currentTime = 0;
     audioSplash.play();
   }
-
   drop.style.top = `${itemPositionY - 10}px`;
   drop.style.left = `${itemPositionX - 30}px`;
   setTimeout(() => {drop.remove()}, 100);

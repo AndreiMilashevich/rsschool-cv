@@ -9,7 +9,7 @@
   text-align: center;
 
   &_start {
-    background: url('/raindrops/images/drops.png') no-repeat center, linear-gradient($left-back-color-top 0, $left-back-color-bottom 80%);
+    background: url('../images/drops.png') no-repeat center, linear-gradient($left-back-color-top 0, $left-back-color-bottom 80%);
     background-size: 30%;
     z-index: 1;
 
