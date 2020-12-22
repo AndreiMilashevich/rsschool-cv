@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fancy-weather</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">    
+  <link href="main.css" rel="stylesheet"></head>
+  <body>
+    <div class="container">
+      <div class="container_top">
+        <div class="container_top_controls">
+          <div class="button button_refresh">
+            <div class="button_refresh_arrows"></div>
+          </div>
+          <div class="button button_lang">EN</div>
+          <div class="button button_temp">
+            <div class="button button_temp_f">&#176;F</div>
+            <div class="button button_temp_c">&#176;C</div>
+          </div>
+        </div>
+        <div class="container_top_search">
+          <input type="text" class="input_field" />
+          <div class="submit">SEARCH</div>
+        </div>
+      </div>
+      <div class="container_forecast">
+          <div class="container_data">
+              <p class="city">MINSK, BELARUS</p>
+              <p class="time">Mon 28 October 17:23:12</p>
+              <div class="weather_today">
+                  <div class="temp_now">10&#176;</div>
+                  <div class="weather_now">
+                      <div class="weather_picture"></div>
+                      <p>overcast</p>
+                      <p>feels like: 7 &#176;</p>
+                      <p>wind: 2 m/s</p>
+                      <p>humidity: 83%</p>
+                  </div>
+              </div>
+              <div class="weather_other">
+                  <div class="weather_tomorrow">tuesday</div>
+                  <div class="weather_after_tomorrow">wednesday</div>
+                  <div class="weather_after_after">thursday</div>
+              </div>
+          </div>
+          <div class="container_map"></div>
+      </div>
+    </div>
+  <script src="main.js"></script></body>
+</html>
