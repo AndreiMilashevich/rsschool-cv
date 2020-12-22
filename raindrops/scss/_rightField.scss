@@ -44,7 +44,7 @@
 }
 
 .score {
-  -webkit-user-select: none;
+  user-select: none;
 
   &::before {
     position: absolute;
@@ -74,7 +74,7 @@
   &_value {
     font-size: 3rem;
     font-weight: bold;
-    -webkit-user-select: none;
+    user-select: none;
     text-overflow: clip;
   }
 }
@@ -85,13 +85,13 @@
   align-items: center;
   width: 33%;
   height: 25%;
-  border: 1px solid grey;
+  border: 1px solid #808080;
   box-sizing: border-box;
   background-color: $button-color;
   font-size: 3.2rem;
   font-weight: bold;
   cursor: pointer;
-  -webkit-user-select: none;
+  user-select: none;
 
   &:hover {
     background-color: $display-color;
@@ -104,7 +104,6 @@
   &_text {
     font-size: 1rem;
     font-weight: bold;
-
   }
 
   &_wide {
@@ -142,13 +141,13 @@
     align-items: center;
     width: 30%;
     height: 90%;
-    border: 1px solid grey;
+    border: 1px solid #808080;
     box-sizing: border-box;
     background-color: $button-color;
     font-size: 1.5rem;
     font-weight: bold;
     cursor: pointer;
-    -webkit-user-select: none;
+    user-select: none;
     border-radius: 5px;
 
     &:hover {
