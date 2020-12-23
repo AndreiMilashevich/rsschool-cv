@@ -4,8 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Fancy-weather</title>
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">    
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <div class="container">
@@ -21,31 +24,37 @@
           </div>
         </div>
         <div class="container_top_search">
-          <input type="text" class="input_field" />
+          <input type="text" class="input_field"  />
           <div class="submit">SEARCH</div>
         </div>
       </div>
       <div class="container_forecast">
-          <div class="container_data">
-              <p class="city">MINSK, BELARUS</p>
-              <p class="time">Mon 28 October 17:23:12</p>
-              <div class="weather_today">
-                  <div class="temp_now">10&#176;</div>
-                  <div class="weather_now">
-                      <div class="weather_picture"></div>
-                      <p>overcast</p>
-                      <p>feels like: 7 &#176;</p>
-                      <p>wind: 2 m/s</p>
-                      <p>humidity: 83%</p>
-                  </div>
-              </div>
-              <div class="weather_other">
-                  <div class="weather_tomorrow">tuesday</div>
-                  <div class="weather_after_tomorrow">wednesday</div>
-                  <div class="weather_after_after">thursday</div>
-              </div>
+        <div class="container_data">
+          <p class="city">MINSK, BELARUS</p>
+          <p class="text time"></p>
+          <div class="weather_today">
+            <div class="temp_now">-10&#176;</div>
+            <div class="weather_now">
+              <p class="text">overcast</p>
+              <p class="text">feels like: 7 &#176;</p>
+              <p class="text">wind: 2 m/s</p>
+              <p class="text">humidity: 83%</p>
+            </div>
           </div>
-          <div class="container_map"></div>
+          <div class="weather_other">
+            <div class="weather_item text"><p>tuesday</p>
+            <p>-7&#176</p></div>
+            <div class="weather_item text"><p>wednesday</p><p>-7&#176</p></div>
+            <div class="weather_item text"><p>thurday</p>-7&#176</p></div>
+          </div>
+        </div>
+        <div class="container_map">
+          <div class="map">
+            <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A1c145ee2fc7b012a3c78c25fe40294b81f348cd08f2d91ff53d94dc82fad7046&amp;source=constructor" ></iframe>
+          </div>
+          <p class="coord">latitude: 50&#176;54'</p>
+          <p class="coord">longitude: 27&#176;34'</p>
+        </div>
       </div>
     </div>
   </body>

@@ -1,14 +1,22 @@
 body {
   position: relative;
   margin: 0;
-  font-size: 10px;
   color: $main-text-color;
   font-family: 'Montserrat', sans-serif;
-  background-image: url('https://s00.yaplakal.com/pics/pics_original/0/8/0/12174080.jpg');
+  background-image: url('https://cdn.photosight.ru/img/4/a2d/5942981_xlarge.jpg');
   background-repeat: no-repeat;
+  background-position: center;
   background-size: cover;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+html {
+  font-size: 10px;
+
+  @media screen and (max-width: 950px) {
+    font-size: 6px;
+  }
 }

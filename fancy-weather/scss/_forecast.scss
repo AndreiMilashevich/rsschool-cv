@@ -1,19 +1,59 @@
 .container {
   position: relative;
   width: 95%;
-  height: 90vh;
+  //height: 90vh;
   background-color: $container-background;
   border-radius: 10px;
   margin: auto;
   padding: 20px;
 
+  @media screen and (max-width: 950px) {
+    width: 90%;
+  }
+
+  @media screen and (max-width: 950px) {
+    width: 90%;
+  }
+
   &_forecast {
-    margin-top: 40px;
     display: flex;
+    justify-content: space-between;
+    margin-top: 40px;
+
+    @media screen and (max-width: 700px) {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+
+  &_map {
+    width: 300px;
+    height: auto;
+    margin: 20px 15px 0 25px;
+
+    @media screen and (max-width: 950px) {
+      width: calc(100% - 390px);
+    }
+
+
+    @media screen and (max-width: 700px) {
+      width: 80%;
+      height: 250px;
+    }
   }
 
   &_data {
-    width: 50%;
+    width: 550px;
+    display: flex;
+    flex-direction: column;
+
+    @media screen and (max-width: 950px) {
+      width: 350px;
+    }
+
+    @media screen and (max-width: 400px) {
+      width: 300px;
+    }
   }
 
   &_top {
@@ -21,6 +61,11 @@
     justify-content: space-between;
     width: 100%;
     box-sizing: border-box;
+
+    @media screen and (max-width: 700px) {
+      flex-direction: column;
+      align-items: center;
+    }
 
     &_controls {
       display: flex;
@@ -31,9 +76,14 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 375px;
+      //width: 375px;
     }
   }
+}
+
+.map {
+  width: 100%;
+  height: 80%;
 }
 
 .button {
@@ -46,8 +96,16 @@
   justify-content: center;
   align-items: center;
   color: $main-text-color;
-  font-size: 1.2rem;
+  font-size: 2rem;
   cursor: pointer;
+
+  &:last-child {
+    margin-right: 0;
+  }
+
+  @media screen and (max-width: 700px) {
+    margin: 5px 25px 5px 0;
+  }
 
   &:hover {
     background-color: $hover-color;
@@ -96,7 +154,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 1rem;
+  font-size: 1.5rem;
   width: 100px;
   height: 45px;
   border-bottom-right-radius: 10px;
@@ -104,7 +162,11 @@
   background-color: rgba(211, 211, 211, 0.2);
   color: $main-text-color;
   cursor: pointer;
-  border: 0 solid white;
+  border: 0;
+
+  @media screen and (max-width: 700px) {
+    width: 90px;
+  }
 }
 
 .input_field {
@@ -112,39 +174,142 @@
   height: 45px;
   margin: 0;
   padding: 10px;
-  border: 0 solid white;
+  border: 0;
   border-bottom-left-radius: 10px;
   border-top-left-radius: 10px;
   background-color: $hover-color;
   color: $main-text-color;
   box-sizing: border-box;
+  
+  &::placeholder {
+    color: $main-text-color;
+  }
+
+  @media screen and (max-width: 700px) {
+    width: 155px;
+  }
 
   &:focus {
-    border: 0 solid white;
-    outline: 0 solid white;
+    border: 0;
+    outline: 0;
   }
 }
 
 .city {
-  font-size: 2.5rem;
+  font-size: 3rem;
   margin: 10px 0;
+
+  @media screen and (max-width: 700px) {
+    text-align: center;
+  }
 }
 
 .time {
-  font-size: 1.5rem;
-  margin: 0;
+  @media screen and (max-width: 700px) {
+    text-align: center;
+  }
+}
+
+.text {
+  font-size: 2rem;
+  margin: 5px 0;
 }
 
 .temp_now {
-  font-size: 12rem;
+  font-size: 20rem;
   font-weight: bold;
+
+  @media screen and (max-width: 400px) {
+    font-size: 12rem;
+  }
 }
 
 .weather {
-  &_picture {
-    width: 200px;
-    height: 200px;
-    background-image: url('../icons/snowy-4.svg');
-    background-size: cover;
+  &_other {
+    display: flex;
+    justify-content: space-between;
+
+    @media screen and (max-width: 400px) {
+      width: 80%;
+      margin: 0 auto;
+    }
   }
+
+  &_item {
+    position: relative;
+    width: 25%;
+    height: auto;
+
+    &::after {
+      content: '';
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      background-image: url('../icons/snowy-2.svg');
+      background-size: cover;
+      top: 30px;
+      left: 30px;
+
+      @media screen and (max-width: 950px) {
+        width: 50px;
+        height: 50px;
+        top: 15px;
+        left: 15px;
+      }
+    }
+  }
+
+  &_today {
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    margin-top: 40px;
+  }
+
+  &_now {
+    padding-left: 20px;
+    padding-bottom: 50px;
+    position: relative;
+
+    @media screen and (max-width: 950px) {
+      padding-bottom: 20px;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      background-image: url('../icons/snowy-4.svg');
+      background-size: 100% 100%;
+      top: -160px;
+      left: -20px;
+
+      @media screen and (max-width: 950px) {
+        width: 100px;
+        height: 100px;
+        top: -80px;
+        left: 0;
+      }
+
+      @media screen and (max-width: 400px) {
+        width: 75px;
+        height: 75px;
+        top: -60px;
+        left: 0;
+      }
+    }
+  }
+}
+
+iframe {
+  border-radius: 20px;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.coord {
+  font-size: 1.6rem;
 }
