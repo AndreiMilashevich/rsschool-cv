@@ -4,10 +4,44 @@ const refreshButton = document.querySelector('.button_refresh');
 const arrows = document.querySelector('.button_refresh_arrows');
 const time = document.querySelector('.time');
 const langButton = document.querySelector('.button_lang');
+const searchButton = document.querySelector('.submit');
 const inputField = document.querySelector('.input_field');
+const imageLinksLibrary = [
+  'https://cdn.photosight.ru/img/4/a2d/5942981_xlarge.jpg',
+  'https://russianplanes.net/images/to271000/270331.jpg',
+  'https://russianplanes.net/images/to269000/268392.jpg',
+  'https://russianplanes.net/images/to238000/237498.jpg',
+  'https://russianplanes.net/images/to277000/276528.jpg',
+  'https://russianplanes.net/images/to180000/179923.jpg',
+  'https://russianplanes.net/images/to254000/253139.jpg',
+  'https://russianplanes.net/images/to263000/262475.jpg',
+  'https://russianplanes.net/images/to275000/274157.jpg',
+  'https://russianplanes.net/images/to267000/266680.jpg',
+  'https://russianplanes.net/images/to267000/266697.jpg',
+  'https://russianplanes.net/images/to248000/247127.jpg',
+  'https://russianplanes.net/images/to266000/265182.jpg',
+  'https://russianplanes.net/images/to178000/177881.jpg',
+  'https://russianplanes.net/images/to166000/165952.jpg',
+  'https://russianplanes.net/images/to142000/141759.jpg'
+]
 
+const city = document.querySelector('.city');
+const tempNow = document.querySelector('.temp_now');
+const feels = document.querySelector('.feels');
+const wind = document.querySelector('.wind');
+const humidity = document.querySelector('.humidity');
+const weatherDescription = document.querySelector('.weather_description');
+const weatherNowIcon = document.querySelector('.weather_image_main');
+const weatherItem = document.querySelector('.weather_item');
+
+searchButton.addEventListener('click', () => {
+  console.log('click');
+  getWeather();
+  setTimeout(setWeather(), 1000);
+})
 
 let lang;
+let tempFlag = 'c';
 
 function getLang() {
   if (localStorage.getItem('lang') === null) {
@@ -30,41 +64,87 @@ function setPageContent() {
 
 let unsplashAccessKey='cZQGeB1ysDcDPOXSoOgZDe9uwqVNQ_cs0kCq7UmzMzA';
 
-// function getWeather() {
-//   //const url = 'api.openweathermap.org/data/2.5/forecast?q=Minsk&appid=96e6b196f9fa76950df28c29b8eaa59c';
-//   const url ='api.openweathermap.org/data/2.5/forecast?q=London,uk&callback=test&appid=96e6b196f9fa76950df28c29b8eaa59c';
-//   fetch(url)
-//     .then(res => res.json())
-//     .then(data => {
-//       console.log(data.urls.regular);
-//     })
-//     .catch( err => console.log(err)
-//     );
-// }
-
-async function getWeatherTest() {
-  const url ='api.openweathermap.org/data/2.5/forecast?q=London,uk&callback=test&appid=96e6b196f9fa76950df28c29b8eaa59c';
+async function getWeather() {
+  let searchSity = document.querySelector('.input_field');
+  console.log(searchSity.textContent);
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${searchSity.value}&lang=${lang}&appid=96e6b196f9fa76950df28c29b8eaa59c`;
   const res = await fetch(url);
   const data = await res.json();
-  console.log(data.urls.regular);
+  localStorage.setItem('weather', JSON.stringify(data));
 }
 
-// async function getLinkToImage() {
-//   const url = 'https://api.unsplash.com/photos/random?query=morning&client_id=cZQGeB1ysDcDPOXSoOgZDe9uwqVNQ_cs0kCq7UmzMzA';
-//   const res = await fetch(url);
-//   const data = await res.json();
-//   console.log(data.urls.regular);
-//   //document.body.backgroundImage = `url(${data})`;
-// }
+function convertTemp(temp) {
+  if (tempFlag === 'c') {
+    return Math.round(temp - 273.15)
+  } else {
+    return Math.round((temp * 9 / 5) - 459.67) // converting Kelvins to Fahrenheit
+  }
+}
+
+function setWeather() {
+  const data = JSON.parse(localStorage.getItem('weather'));
+  console.log(data);
+  city.textContent = `${data.name}, ${data.sys.country}`;
+  tempNow.textContent = `${convertTemp(data.main.temp)}°`;
+  feels.textContent = `${convertTemp(data.main.feels_like)}`;
+  wind.textContent = `${data.wind.speed}`;
+  humidity.textContent = `${data.main.humidity}`;
+  weatherDescription.textContent = `${data.weather[0].description}`;
+  switch(data.weather[0].main) {
+    case('Snow'):
+    weatherNowIcon.style.backgroundImage = "url('../icons/snow.svg')";
+    break;
+    case('Thunderstorm'):
+    weatherNowIcon.style.backgroundImage = "url('../icons/thunderstorms.svg')";
+    break;
+    case('Drizzle'):
+    weatherNowIcon.style.backgroundImage = "url('../icons/drizzle.svg')";
+    break;
+    case('Fog'):
+    weatherNowIcon.style.backgroundImage = "url('../icons/mist.svg')";
+    break;
+    case('Clean'):
+    weatherNowIcon.style.backgroundImage = "url('../icons/clear-day.svg')";
+    break;
+    case('Clouds'):
+    weatherNowIcon.style.backgroundImage = "url('../icons/cloudy.svg')";
+    break;
+    case('Rain'):
+    weatherNowIcon.style.backgroundImage = "url('../icons/rain.svg')";
+    break;
+    default:
+    weatherNowIcon.style.backgroundImage = "url('../icons/partly-cloudy-day.svg')";
+  }
+}
+
+async function setImage() {
+  try {
+    const url = 'https://api.unsplash.com/photos/random?query=morning&client_id=cZQGeB1ysDcDPOXSoOgZDe9uwqVNQ_cs0kCq7UmzMzA';
+    const res = await fetch(url);
+    let data = await res.json();
+    document.body.style.backgroundImage = `url(${data.urls.regular})`;
+  } catch(e) {
+    console.log(e);
+    let num = Math.floor(Math.random() * imageLinksLibrary.length);
+    document.body.style.backgroundImage = `url(${imageLinksLibrary[num]})`;
+  } 
+}
 
 getLang();
 setPageContent();
 //getWeather();
-//getLinkToImage();
-getWeatherTest()
+//setImage();
+setWeather();
 
-refreshButton.addEventListener('click',  () => arrows.classList.toggle('rotate'))
+refreshButton.addEventListener('click',  () => {
+  arrows.classList.toggle('rotate');
+  setImage();
+})
 langButton.addEventListener('click', langSwitch);
+// searchButton.addEventListener('click', () => {
+//   console.log('click');
+//   getWeather();
+// });
 
 function timeInsert() {
   let timeNow = new Date();
