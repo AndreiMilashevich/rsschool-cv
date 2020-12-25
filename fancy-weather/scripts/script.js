@@ -23,9 +23,9 @@ const imageLinksLibrary = [
   'https://russianplanes.net/images/to178000/177881.jpg',
   'https://russianplanes.net/images/to166000/165952.jpg',
   'https://russianplanes.net/images/to142000/141759.jpg'
-]
+];
 
-const city = document.querySelector('.city');
+const cityDOM = document.querySelector('.city');
 const tempNow = document.querySelector('.temp_now');
 const feels = document.querySelector('.feels');
 const wind = document.querySelector('.wind');
@@ -34,11 +34,22 @@ const weatherDescription = document.querySelector('.weather_description');
 const weatherNowIcon = document.querySelector('.weather_image_main');
 const weatherItem = document.querySelector('.weather_item');
 
-searchButton.addEventListener('click', () => {
-  console.log('click');
-  getWeather();
-  setTimeout(setWeather(), 1000);
-})
+let city = 'Minsk'
+let countryCode = '';
+let latitude = 53.9000;
+let longitude = 27.5667;
+
+let c = 
+
+getPlace();
+
+searchButton.addEventListener('click', searchCity);
+
+function searchCity() {
+  city = inputField.value;
+  getWeather(city);
+}
+
 
 let lang;
 let tempFlag = 'c';
@@ -67,10 +78,14 @@ let unsplashAccessKey='cZQGeB1ysDcDPOXSoOgZDe9uwqVNQ_cs0kCq7UmzMzA';
 async function getWeather() {
   let searchSity = document.querySelector('.input_field');
   console.log(searchSity.textContent);
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=${searchSity.value}&lang=${lang}&appid=96e6b196f9fa76950df28c29b8eaa59c`;
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&lang=${lang}&appid=96e6b196f9fa76950df28c29b8eaa59c`;
   const res = await fetch(url);
   const data = await res.json();
-  localStorage.setItem('weather', JSON.stringify(data));
+  latitude = data.coord.lat;
+  longitude = data.coord.lon;
+  console.log(data);
+  setWeather(data);
+  getMap();
 }
 
 function convertTemp(temp) {
@@ -81,10 +96,8 @@ function convertTemp(temp) {
   }
 }
 
-function setWeather() {
-  const data = JSON.parse(localStorage.getItem('weather'));
-  console.log(data);
-  city.textContent = `${data.name}, ${data.sys.country}`;
+function setWeather(data) {
+  cityDOM.textContent = `${data.name}, ${data.sys.country}`;
   tempNow.textContent = `${convertTemp(data.main.temp)}°`;
   feels.textContent = `${convertTemp(data.main.feels_like)}`;
   wind.textContent = `${data.wind.speed}`;
@@ -117,6 +130,26 @@ function setWeather() {
   }
 }
 
+
+
+async function getPlace() {
+  try {
+  const url = 'https://ipinfo.io/json?token=cb5f57499775d8';
+  const res = await fetch(url);
+  const data = await res.json();
+  city = data.city;
+  countryCode = data.country;
+  let loc = data.loc.split(',');
+  latitude = loc[0];
+  longitude = loc[1];
+  getMap();
+  getWeather();
+} catch {
+  console.log('Error, do not get your IP');
+  getMap();
+  }
+}
+
 async function setImage() {
   try {
     const url = 'https://api.unsplash.com/photos/random?query=morning&client_id=cZQGeB1ysDcDPOXSoOgZDe9uwqVNQ_cs0kCq7UmzMzA';
@@ -132,19 +165,14 @@ async function setImage() {
 
 getLang();
 setPageContent();
-//getWeather();
-//setImage();
-setWeather();
+setImage();
 
 refreshButton.addEventListener('click',  () => {
   arrows.classList.toggle('rotate');
   setImage();
 })
 langButton.addEventListener('click', langSwitch);
-// searchButton.addEventListener('click', () => {
-//   console.log('click');
-//   getWeather();
-// });
+
 
 function timeInsert() {
   let timeNow = new Date();
@@ -159,7 +187,6 @@ function timeInsert() {
   } else {
     time.textContent = `${dayOfWeekShortRu[day]} ${date} ${monthTitleRu[month]} ${hour.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
   }
-  
   setTimeout(timeInsert, 1000);
 }
 
@@ -185,3 +212,25 @@ let monthTitleEn = ['January', 'February', 'March', 'April', 'May', 'June', 'Jul
 let monthTitleRu = ['Января', 'Февраля', 'Марта', 'Апреля', 'Мая', 'Июня', 'Июля', 'Августа', 'Сентября', 'Октября', 'Ноября', 'Декабря'];
 
 timeInsert();
+
+function getMap() {
+  
+  let mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
+  mapboxgl.accessToken = 'pk.eyJ1Ijoiam9objQ4NDIiLCJhIjoiY2tqNGUwd3dyMGp5MjJ3bnZkaGg5NnE2dyJ9.U0xQhDaQracUXFn6vxkwUw';
+  let map = new mapboxgl.Map({
+  container: 'map',
+  style: 'mapbox://styles/mapbox/streets-v11',
+  zoom: 10,
+  center: [longitude, latitude]
+  });
+}
+  
+async function getCountryByCode() {
+  const code = "by"
+  const url = `../countries2.json`;
+  const res = await fetch(url);
+  const data = await res.json();
+  console.log(data);
+}
+
+getCountryByCode();

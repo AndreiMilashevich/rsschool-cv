@@ -302,10 +302,10 @@
   }
 }
 
-iframe {
+#map {
   border-radius: 20px;
   width: 100%;
-  height: 100%;
+  height: 80%;
   border: 0;
 }
 
@@ -320,12 +320,19 @@ iframe {
   width: 200px;
   height: 200px;
   top: -110%;
+  left: -10px;
 
   @media screen and (max-width: 950px) {
     width: 100px;
     height: 100px;
     top: -90%;
     left: 0;
+  }
 
+  @media screen and (max-width: 400px) {
+    width: 75px;
+    height: 75px;
+    top: -60%;
+    left: 10%;
   }
 }
