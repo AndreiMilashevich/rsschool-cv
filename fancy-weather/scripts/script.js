@@ -33,11 +33,15 @@ const humidity = document.querySelector('.humidity');
 const weatherDescription = document.querySelector('.weather_description');
 const weatherNowIcon = document.querySelector('.weather_image_main');
 const weatherItem = document.querySelector('.weather_item');
+const lonDOM = document.querySelector('.lon');
+const latDOM = document.querySelector('.lat');
+
 
 let city = 'Minsk'
 let countryCode = '';
 let latitude = 53.9000;
 let longitude = 27.5667;
+let countryName = ''
 
 let coordOptions = {
   enableHighAccuracy: true,
@@ -47,10 +51,8 @@ let coordOptions = {
 
 function success(pos) {
   let crd = pos.coords;
-  latitude = crd.latitude;
-  longitude = crd.longitude
-  console.log(`Latitude : ${latitude}`);
-  console.log(`Longitude: ${longitude}`);
+  latitude = parseFloat(crd.latitude).toPrecision(4);
+  longitude = parseFloat(crd.longitude).toPrecision(4);
   getMap();
   getWeatherByCoord();
   
@@ -64,13 +66,15 @@ function error(err) {
 
 navigator.geolocation.getCurrentPosition(success, error, coordOptions);
 
-//getPlace();
 
-searchButton.addEventListener('click', searchCity);
+searchButton.addEventListener('click', () => {
+    searchCity();  
+});
 
-function searchCity() {
+async function searchCity() {
   city = inputField.value;
-  getWeatherByCity(city);
+  await getWeatherByCity(city);
+  setPageContent();
 }
 
 
@@ -88,11 +92,39 @@ function getLang() {
 
 function setPageContent() {
   if (lang === 'en') {
-    langButton.textContent = 'EN';
-    inputField.placeholder = 'Enter city'
+    setContentEn();
   } else {
-    langButton.textContent = 'RU';
-    inputField.placeholder = 'Найти город'
+    setContentRu();
+    
+  }
+}
+
+
+function setContentRu() {
+  langButton.textContent = 'RU';
+  inputField.placeholder = 'Найти город'
+  lang = 'ru';
+  localStorage.setItem('lang','ru');
+  lonDOM.textContent = `долгота: ${Math.floor(longitude)}° ${Math.round((longitude % 1) * 60)}'`;
+  latDOM.textContent = `широта: ${Math.floor(latitude)}° ${Math.round((latitude % 1) * 60)}'`;
+  getCountryByCode();
+}
+
+function setContentEn() {
+  langButton.textContent = 'EN';
+    inputField.placeholder = 'Enter city'
+    lang = 'en';
+    localStorage.setItem('lang','en');
+    lonDOM.textContent = `longitude: ${Math.floor(longitude)}° ${Math.round((longitude % 1) * 60)}'`;
+    latDOM.textContent = `latitude: ${Math.floor(latitude)}° ${Math.round((latitude % 1) * 60)}'`;
+    getCountryByCode();
+}
+
+function switchPageContent() {
+  if (lang === 'en') {
+    setContentRu();
+  } else {
+    setContentEn();
   }
 }
 
@@ -103,7 +135,9 @@ async function getWeatherByCoord() {
   const res = await fetch(url);
   const data = await res.json();
   console.log(data);
-  setWeather(data);
+  countryCode = await data.sys.country;
+  await getCountryByCode(countryCode);
+  setWeather(data, countryName);
 }
 
 async function getWeatherByCity() {
@@ -115,7 +149,9 @@ async function getWeatherByCity() {
   latitude = data.coord.lat;
   longitude = data.coord.lon;
   console.log(data);
-  setWeather(data);
+  countryCode = data.sys.country;
+  await getCountryByCode(countryCode);
+  setWeather(data, countryName);
   getMap();
 }
 
@@ -127,8 +163,9 @@ function convertTemp(temp) {
   }
 }
 
-function setWeather(data) {
-  cityDOM.textContent = `${data.name}, ${data.sys.country}`;
+function setWeather(data, countryName) {
+  
+  cityDOM.textContent = `${data.name}, ${countryName}`;
   tempNow.textContent = `${convertTemp(data.main.temp)}°`;
   feels.textContent = `${convertTemp(data.main.feels_like)}`;
   wind.textContent = `${data.wind.speed}`;
@@ -145,6 +182,9 @@ function setWeather(data) {
     weatherNowIcon.style.backgroundImage = "url('../icons/drizzle.svg')";
     break;
     case('Fog'):
+    weatherNowIcon.style.backgroundImage = "url('../icons/mist.svg')";
+    break;
+    case('Haze'):
     weatherNowIcon.style.backgroundImage = "url('../icons/mist.svg')";
     break;
     case('Clean'):
@@ -200,7 +240,7 @@ refreshButton.addEventListener('click',  () => {
   arrows.classList.toggle('rotate');
   setImage();
 })
-langButton.addEventListener('click', langSwitch);
+langButton.addEventListener('click', switchPageContent);
 
 
 function timeInsert() {
@@ -219,19 +259,7 @@ function timeInsert() {
   setTimeout(timeInsert, 1000);
 }
 
-function langSwitch() {
-  if (lang === 'en') {
-    langButton.textContent = 'RU';
-    inputField.placeholder = 'Найти город'
-    lang = 'ru';
-    localStorage.setItem('lang','ru');
-  } else {
-    langButton.textContent = 'EN';
-    inputField.placeholder = 'Enter city'
-    lang = 'en';
-    localStorage.setItem('lang','en');
-  }
-}
+
 
 let dayOfWeekEn = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thurday', 'Friday', 'Saturday'];
 let dayOfWeekRu = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
@@ -254,14 +282,45 @@ function getMap() {
   });
 }
   
-async function getCountryByCode() {
-  const code = "by"
-  const url = `../countries2.json`;
+async function getCountryByCode(code) {
+  if (lang === 'ru') {
+    const url = `../countries2.json`;
+    const res = await fetch(url);
+    const data = await res.json();
+    for (let i = 0; i < data.length; i++) {
+      if (data[i].ALFA2 === code) {
+        countryName = data[i].SHORTNAME; 
+        countryName = countryName.split(' ');
+        for (let i = 0; i < countryName.length; i++){
+          countryName[i] = countryName[i].split('');
+          for (let j = 1; j < countryName[i].length; j++) {
+            countryName[i][j] = countryName[i][j].toLowerCase();
+          }
+          countryName[i] = countryName[i].join('');
+        }
+        countryName = countryName.join(' ');
+        console.log(countryName);
+        return;
+     }
+    }
+  } else if (lang === 'en') {
+    const url = `https://restcountries.eu/rest/v2/alpha/${code}`;
+    const res = await fetch(url);
+    const data = await res.json();
+    countryName = data.name;
+    console.log(data.name);
+  }
+  
+  
+}
+
+async function getForecast() {
+  const url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&lang=${lang}&cnt=25&appid=96e6b196f9fa76950df28c29b8eaa59c`;
   const res = await fetch(url);
   const data = await res.json();
   console.log(data);
+  
 }
 
-getCountryByCode();
-
+getForecast()
 
