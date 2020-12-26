@@ -39,15 +39,38 @@ let countryCode = '';
 let latitude = 53.9000;
 let longitude = 27.5667;
 
-let c = 
+let coordOptions = {
+  enableHighAccuracy: true,
+  timeout: 5000,
+  maximumAge: 0
+};
 
-getPlace();
+function success(pos) {
+  let crd = pos.coords;
+  latitude = crd.latitude;
+  longitude = crd.longitude
+  console.log(`Latitude : ${latitude}`);
+  console.log(`Longitude: ${longitude}`);
+  getMap();
+  getWeatherByCoord();
+  
+}
+
+function error(err) {
+  console.warn(`ERROR(${err.code}): ${err.message}`);
+  getPlace();
+  getWeatherByCity()
+}
+
+navigator.geolocation.getCurrentPosition(success, error, coordOptions);
+
+//getPlace();
 
 searchButton.addEventListener('click', searchCity);
 
 function searchCity() {
   city = inputField.value;
-  getWeather(city);
+  getWeatherByCity(city);
 }
 
 
@@ -75,7 +98,15 @@ function setPageContent() {
 
 let unsplashAccessKey='cZQGeB1ysDcDPOXSoOgZDe9uwqVNQ_cs0kCq7UmzMzA';
 
-async function getWeather() {
+async function getWeatherByCoord() {
+  const url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&lang=${lang}&appid=96e6b196f9fa76950df28c29b8eaa59c`;
+  const res = await fetch(url);
+  const data = await res.json();
+  console.log(data);
+  setWeather(data);
+}
+
+async function getWeatherByCity() {
   let searchSity = document.querySelector('.input_field');
   console.log(searchSity.textContent);
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&lang=${lang}&appid=96e6b196f9fa76950df28c29b8eaa59c`;
@@ -130,8 +161,6 @@ function setWeather(data) {
   }
 }
 
-
-
 async function getPlace() {
   try {
   const url = 'https://ipinfo.io/json?token=cb5f57499775d8';
@@ -143,7 +172,7 @@ async function getPlace() {
   latitude = loc[0];
   longitude = loc[1];
   getMap();
-  getWeather();
+  getWeatherByCity();
 } catch {
   console.log('Error, do not get your IP');
   getMap();
@@ -220,7 +249,7 @@ function getMap() {
   let map = new mapboxgl.Map({
   container: 'map',
   style: 'mapbox://styles/mapbox/streets-v11',
-  zoom: 10,
+  zoom: 11,
   center: [longitude, latitude]
   });
 }
@@ -234,3 +263,5 @@ async function getCountryByCode() {
 }
 
 getCountryByCode();
+
+
