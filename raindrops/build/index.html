@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Raindrops</title>
+  <link href="main.css" rel="stylesheet"></head>
+  <body>
+    <div class="container">
+      <div class="page page_start">
+        <div class="top">
+          <h1>Raindrops</h1>
+          <p class="page_start_text">
+            it's raining numbers! Solve the equations before they fill the lake.
+          </p>
+          <div class="statistics">
+            <p class="final_score"></p>
+            <p class="final_answers"></p>
+            <p class="final_answers_right"></p>
+            <p class="final_accuracy"></p>
+          </div>
+        </div>
+        <div class="page_start_wrapper">
+          <button class="button_guide">How to play</button>
+          <button class="button_play">Play</button>
+          <label><input type="checkbox" class="checkbox_mult">multiplication/division</label>
+        </div>
+      </div>
+      <div class="field_plaing">
+        <div class="drop_container"></div>
+        <div class="rock"></div>
+        <div class="wave" id="morph-shape">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="100%"
+            height="100%"
+            viewBox="0 0 1000 300"
+            preserveAspectRatio="none"
+          >
+            <path
+              fill="#83D2E5"
+              d="M 0,400 C 0,400 0,200 0,200 C 41.55445805790136,169.55710716303153 83.10891611580271,139.11421432606306 123,133 C 162.8910838841973,126.88578567393695 201.1187935946905,145.10024985877934 253,179 C 304.8812064053095,212.89975014122066 370.4159095054354,262.48478623881965 413,257 C 455.5840904945646,251.51521376118038 475.2175683835678,190.96060518594203 515,189 C 554.7824316164322,187.03939481405797 614.7138169602935,243.6727930174122 662,230 C 709.2861830397065,216.3272069825878 743.9271637752581,132.34822274440918 786,137 C 828.0728362247419,141.65177725559082 877.577527938674,234.93431600495109 927,254 C 976.422472061326,273.0656839950489 1025.7627244700461,217.91451323578633 1068,192 C 1110.2372755299539,166.08548676421367 1145.3715741811416,169.40763105190368 1183,185 C 1220.6284258188584,200.59236894809632 1260.750978805388,228.45496255659896 1304,233 C 1347.249021194612,237.54503744340104 1393.624510597306,218.77251872170052 1440,200 C 1440,200 1440,400 1440,400 Z"
+            >
+              <animate
+                attributeName="d"
+                dur="5s"
+                repeatCount="indefinite"
+                values="
+              M 0,400 C 0,400 0,200 0,200 C 44.26159913160349,178.0444043851898 88.52319826320698,156.0888087703796 133,148 C 177.47680173679302,139.9111912296204 222.1688060787755,145.68916930367138 263,161 C 303.8311939212245,176.31083069632862 340.80157742169115,201.15451401493488 380,196 C 419.19842257830885,190.84548598506512 460.62488423445996,155.69277463658918 515,149 C 569.37511576554,142.30722536341082 636.698885640469,164.07438743870847 677,185 C 717.301114359531,205.92561256129153 730.579573203664,226.009675608577 765,209 C 799.420426796336,191.990324391423 854.9828215448747,137.8869101269835 899,130 C 943.0171784551253,122.11308987301649 975.4891406168376,160.44268388348894 1027,190 C 1078.5108593831624,219.55731611651106 1149.0606159877743,240.34235433906065 1198,253 C 1246.9393840122257,265.65764566093935 1274.2683954320644,270.18789876026835 1311,260 C 1347.7316045679356,249.81210123973162 1393.8658022839677,224.90605061986582 1440,200 C 1440,200 1440,400 1440,400 Z;
+              M 0,400 C 0,400 0,200 0,200 C 41.55445805790136,169.55710716303153 83.10891611580271,139.11421432606306 123,133 C 162.8910838841973,126.88578567393695 201.1187935946905,145.10024985877934 253,179 C 304.8812064053095,212.89975014122066 370.4159095054354,262.48478623881965 413,257 C 455.5840904945646,251.51521376118038 475.2175683835678,190.96060518594203 515,189 C 554.7824316164322,187.03939481405797 614.7138169602935,243.6727930174122 662,230 C 709.2861830397065,216.3272069825878 743.9271637752581,132.34822274440918 786,137 C 828.0728362247419,141.65177725559082 877.577527938674,234.93431600495109 927,254 C 976.422472061326,273.0656839950489 1025.7627244700461,217.91451323578633 1068,192 C 1110.2372755299539,166.08548676421367 1145.3715741811416,169.40763105190368 1183,185 C 1220.6284258188584,200.59236894809632 1260.750978805388,228.45496255659896 1304,233 C 1347.249021194612,237.54503744340104 1393.624510597306,218.77251872170052 1440,200 C 1440,200 1440,400 1440,400 Z;
+              M 0,400 C 0,400 0,200 0,200 C 44.26159913160349,178.0444043851898 88.52319826320698,156.0888087703796 133,148 C 177.47680173679302,139.9111912296204 222.1688060787755,145.68916930367138 263,161 C 303.8311939212245,176.31083069632862 340.80157742169115,201.15451401493488 380,196 C 419.19842257830885,190.84548598506512 460.62488423445996,155.69277463658918 515,149 C 569.37511576554,142.30722536341082 636.698885640469,164.07438743870847 677,185 C 717.301114359531,205.92561256129153 730.579573203664,226.009675608577 765,209 C 799.420426796336,191.990324391423 854.9828215448747,137.8869101269835 899,130 C 943.0171784551253,122.11308987301649 975.4891406168376,160.44268388348894 1027,190 C 1078.5108593831624,219.55731611651106 1149.0606159877743,240.34235433906065 1198,253 C 1246.9393840122257,265.65764566093935 1274.2683954320644,270.18789876026835 1311,260 C 1347.7316045679356,249.81210123973162 1393.8658022839677,224.90605061986582 1440,200 C 1440,200 1440,400 1440,400 Z"
+              />
+            </path>
+          </svg>
+        </div>
+      </div>
+      <div class="field_controls">
+        <div class="box_score">
+          <span class="score">Score: <span class="score_value"></span></span>
+        </div>
+        <div class="box_buttons_wrapper">
+          <div class="box_enter">
+            <div class="answer"><span class="answer_value"></span></div>
+            <div class="buttons_wrapper">
+              <div class="buttons_left">
+                <div class="button number" data-key="103" data-key2="55"><span>7</span>
+                </div>
+                <div class="button number" data-key="104" data-key2="56"><span>8</span>
+                </div>
+                <div class="button number" data-key="105" data-key2="57"><span>9</span>
+                </div>
+                <div class="button number" data-key="100" data-key2="52"><span>4</span>
+                </div>
+                <div class="button number" data-key="101" data-key2="53"><span>5</span>
+                </div>
+                <div class="button number" data-key="102" data-key2="54"><span>6</span>
+                </div>
+                <div class="button number" data-key="97" data-key2="49"><span>1</span>
+                </div>
+                <div class="button number" data-key="98" data-key2="50"><span>2</span>
+                </div>
+                <div class="button number" data-key="99" data-key2="51"><span>3</span>
+                </div>
+                <div class="button button_wide number" data-key="96" data-key2="48">0</div>
+                <div class="button delete" data-key="8">
+                  <span class="button_text">Delete</span>
+                </div>
+              </div>
+              <div class="buttons_right">
+                <div class="button button_tall clear" data-key="46">
+                  <span class="button_text">Clear</span>
+                </div>
+                <div class="button button_tall enter" data-key="13">
+                  <span class="button_text">Enter</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="box_controls">
+          <div class="button_controls box_controls_music">
+            <span class="box_controls_text">music</span>
+          </div>
+          <div class="button_controls box_controls_sound">
+            <span class="box_controls_text">sound</span>
+          </div>
+          <div class="button_controls box_controls_quit">
+            <span class="box_controls_text">quit</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <audio src="../sounds/splash.ogg" class="splash"></audio>
+    <audio src="../sounds/alert.ogg" class="alert"></audio>
+    <audio src="../sounds/rain.ogg" class="rain" loop></audio>
+  <script src="main.js"></script></body>
+</html>

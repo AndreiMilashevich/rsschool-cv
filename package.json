@@ -1,0 +1,26 @@
+{
+  "name": "rsschool-cv",
+  "version": "1.0.0",
+  "description": "<https://andreimilashevich.github.io/rsschool-cv/simple-singolo/index>",
+  "main": "index.js",
+  "dependencies": {
+    "editorconfig": "^0.15.3"
+  },
+  "devDependencies": {
+    "webpack": "^5.10.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AndreiMilashevich/rsschool-cv.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AndreiMilashevich/rsschool-cv/issues"
+  },
+  "homepage": "https://github.com/AndreiMilashevich/rsschool-cv#readme"
+}

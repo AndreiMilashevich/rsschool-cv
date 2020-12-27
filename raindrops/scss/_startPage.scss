@@ -1,0 +1,49 @@
+.page {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  position: absolute;
+  height: 100vh;
+  text-align: center;
+
+  &_start {
+    background: url('../images/drops.png') no-repeat center, linear-gradient($left-back-color-top 0, $left-back-color-bottom 80%);
+    background-size: 30%;
+    z-index: 1;
+
+    &_wrapper {
+      padding-bottom: 50px;
+    }
+
+    &_text {
+      font-size: 1.5rem;
+    }
+  }
+}
+
+h1 {
+  font-size: 3rem;
+}
+
+.score_final {
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+.statistics {
+  text-align: left;
+  font-size: 1.4rem;
+  max-width: 250px;
+  color: #09f;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+  box-shadow: 0 0 3px #000;
+}
+
+.top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
