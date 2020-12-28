@@ -1,11 +1,25 @@
 import '../scss/index.scss'
 
+//variables
+
 const refreshButton = document.querySelector('.button_refresh');
 const arrows = document.querySelector('.button_refresh_arrows');
 const time = document.querySelector('.time');
 const langButton = document.querySelector('.button_lang');
 const searchButton = document.querySelector('.submit');
 const inputField = document.querySelector('.input_field');
+const cityDOM = document.querySelector('.city');
+const tempNow = document.querySelector('.temp_now');
+const feels = document.querySelector('.feels');
+const wind = document.querySelector('.wind');
+const humidity = document.querySelector('.humidity');
+const weatherDescription = document.querySelector('.weather_description');
+const weatherNowIcon = document.querySelector('.weather_image_main');
+const weatherItem = document.querySelector('.weather_item');
+const lonDOM = document.querySelector('.lon');
+const latDOM = document.querySelector('.lat');
+const map = document.querySelector('.map');
+
 const imageLinksLibrary = [
   'https://cdn.photosight.ru/img/4/a2d/5942981_xlarge.jpg',
   'https://russianplanes.net/images/to271000/270331.jpg',
@@ -25,61 +39,64 @@ const imageLinksLibrary = [
   'https://russianplanes.net/images/to142000/141759.jpg'
 ];
 
-const cityDOM = document.querySelector('.city');
-const tempNow = document.querySelector('.temp_now');
-const feels = document.querySelector('.feels');
-const wind = document.querySelector('.wind');
-const humidity = document.querySelector('.humidity');
-const weatherDescription = document.querySelector('.weather_description');
-const weatherNowIcon = document.querySelector('.weather_image_main');
-const weatherItem = document.querySelector('.weather_item');
-const lonDOM = document.querySelector('.lon');
-const latDOM = document.querySelector('.lat');
-
-
-let city = 'Minsk'
-let countryCode = '';
-let latitude = 53.9000;
-let longitude = 27.5667;
-let countryName = ''
-
-let coordOptions = {
+const mapOptions = {
   enableHighAccuracy: true,
   timeout: 5000,
   maximumAge: 0
 };
 
-function success(pos) {
-  let crd = pos.coords;
-  latitude = parseFloat(crd.latitude).toPrecision(4);
-  longitude = parseFloat(crd.longitude).toPrecision(4);
-  getMap();
-  getWeatherByCoord();
-  
-}
-
-function error(err) {
-  console.warn(`ERROR(${err.code}): ${err.message}`);
-  getPlace();
-  getWeatherByCity()
-}
-
-navigator.geolocation.getCurrentPosition(success, error, coordOptions);
-
-
-searchButton.addEventListener('click', () => {
-    searchCity();  
-});
-
-async function searchCity() {
-  city = inputField.value;
-  await getWeatherByCity(city);
-  setPageContent();
-}
-
-
+let city = ''
+let countryCode = '';
+let latitude;
+let longitude;
+let countryName = ''
 let lang;
 let tempFlag = 'c';
+
+//function declarations
+
+async function setBackground() {
+  try {
+    const url = 'https://api.unsplash.com/photos/random?query=morning&client_id=cZQGeB1ysDcDPOXSoOgZDe9uwqVNQ_cs0kCq7UmzMzA';
+    const res = await fetch(url);
+    const data = await res.json();
+    document.body.style.backgroundImage = `url(${data.urls.regular})`;
+  } catch(e) {
+    console.log(e);
+    const num = Math.floor(Math.random() * imageLinksLibrary.length);
+    document.body.style.backgroundImage = `url(${imageLinksLibrary[num]})`;
+  } 
+}
+
+function getCoordsFromNavigator(pos) {
+  const crd = pos.coords;
+  latitude = parseFloat(crd.latitude).toPrecision(4);
+  longitude = parseFloat(crd.longitude).toPrecision(4);
+  getMap();   // attention
+  getWeatherByCoord();  // attention
+}
+
+function getCoordsFromNavigatorError(err) {
+  console.warn(`ERROR(${err.code}): ${err.message}`);
+  getPlace();
+  getWeatherByCity();
+}
+
+function timeInsert() {
+  const timeNow = new Date();
+  const month = timeNow.getMonth();
+  const day = timeNow.getDay();
+  const date = timeNow.getDate();
+  const hour = timeNow.getHours();
+  const minutes = timeNow.getMinutes();
+  const seconds = timeNow.getSeconds();
+  if (lang === 'en') {
+    time.textContent = `${dayOfWeekShortEn[day]} ${date} ${monthTitleEn[month]} ${hour.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+  } else {
+    time.textContent = `${dayOfWeekShortRu[day]} ${date} ${monthTitleRu[month]} ${hour.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+  }
+  setTimeout(timeInsert, 1000);
+}
 
 function getLang() {
   if (localStorage.getItem('lang') === null) {
@@ -89,16 +106,6 @@ function getLang() {
     lang = localStorage.getItem('lang');
   }
 }
-
-function setPageContent() {
-  if (lang === 'en') {
-    setContentEn();
-  } else {
-    setContentRu();
-    
-  }
-}
-
 
 function setContentRu() {
   langButton.textContent = 'RU';
@@ -120,6 +127,17 @@ function setContentEn() {
     getCountryByCode();
 }
 
+
+
+function setPageContent() {
+  if (lang === 'en') {
+    setContentEn();
+  } else {
+    setContentRu();
+    
+  }
+}
+
 function switchPageContent() {
   if (lang === 'en') {
     setContentRu();
@@ -128,13 +146,59 @@ function switchPageContent() {
   }
 }
 
-let unsplashAccessKey='cZQGeB1ysDcDPOXSoOgZDe9uwqVNQ_cs0kCq7UmzMzA';
+function convertTemp(temp) {
+  if (tempFlag === 'c') {
+    return Math.round(temp - 273.15)
+  } else {
+    return Math.round((temp * 9 / 5) - 459.67) // converting Kelvins to Fahrenheit
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+searchButton.addEventListener('click', () => {
+    searchCity();  
+});
+
+async function searchCity() {
+  city = inputField.value;
+  await getWeatherByCity(city);
+  setPageContent();
+}
+
+async function getWeather(url) {
+  const response = await fetch(url);
+  const data = respon
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 async function getWeatherByCoord() {
-  const url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&lang=${lang}&appid=96e6b196f9fa76950df28c29b8eaa59c`;
+  const url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&lang=${language}&appid=96e6b196f9fa76950df28c29b8eaa59c`;
   const res = await fetch(url);
   const data = await res.json();
-  console.log(data);
   countryCode = await data.sys.country;
   await getCountryByCode(countryCode);
   setWeather(data, countryName);
@@ -142,8 +206,7 @@ async function getWeatherByCoord() {
 
 async function getWeatherByCity() {
   let searchSity = document.querySelector('.input_field');
-  console.log(searchSity.textContent);
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&lang=${lang}&appid=96e6b196f9fa76950df28c29b8eaa59c`;
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&lang=${language}&appid=96e6b196f9fa76950df28c29b8eaa59c`;
   const res = await fetch(url);
   const data = await res.json();
   latitude = data.coord.lat;
@@ -155,13 +218,7 @@ async function getWeatherByCity() {
   getMap();
 }
 
-function convertTemp(temp) {
-  if (tempFlag === 'c') {
-    return Math.round(temp - 273.15)
-  } else {
-    return Math.round((temp * 9 / 5) - 459.67) // converting Kelvins to Fahrenheit
-  }
-}
+
 
 function setWeather(data, countryName) {
   
@@ -219,45 +276,20 @@ async function getPlace() {
   }
 }
 
-async function setImage() {
-  try {
-    const url = 'https://api.unsplash.com/photos/random?query=morning&client_id=cZQGeB1ysDcDPOXSoOgZDe9uwqVNQ_cs0kCq7UmzMzA';
-    const res = await fetch(url);
-    let data = await res.json();
-    document.body.style.backgroundImage = `url(${data.urls.regular})`;
-  } catch(e) {
-    console.log(e);
-    let num = Math.floor(Math.random() * imageLinksLibrary.length);
-    document.body.style.backgroundImage = `url(${imageLinksLibrary[num]})`;
-  } 
-}
+
 
 getLang();
 setPageContent();
-setImage();
+
 
 refreshButton.addEventListener('click',  () => {
   arrows.classList.toggle('rotate');
-  setImage();
+  setBackground();
 })
 langButton.addEventListener('click', switchPageContent);
 
 
-function timeInsert() {
-  let timeNow = new Date();
-  let month = timeNow.getMonth();
-  let day = timeNow.getDay();
-  let date = timeNow.getDate();
-  let hour = timeNow.getHours();
-  let minutes = timeNow.getMinutes();
-  let seconds = timeNow.getSeconds();
-  if (lang === 'en') {
-    time.textContent = `${dayOfWeekShortEn[day]} ${date} ${monthTitleEn[month]} ${hour.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-  } else {
-    time.textContent = `${dayOfWeekShortRu[day]} ${date} ${monthTitleRu[month]} ${hour.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-  }
-  setTimeout(timeInsert, 1000);
-}
+
 
 
 
@@ -268,7 +300,7 @@ let dayOfWeekShortRu = ['Вск', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'
 let monthTitleEn = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 let monthTitleRu = ['Января', 'Февраля', 'Марта', 'Апреля', 'Мая', 'Июня', 'Июля', 'Августа', 'Сентября', 'Октября', 'Ноября', 'Декабря'];
 
-timeInsert();
+
 
 function getMap() {
   
@@ -322,5 +354,10 @@ async function getForecast() {
   
 }
 
-getForecast()
+//functions call
 
+
+setBackground();
+timeInsert();
+navigator.geolocation.getCurrentPosition(getCoordsFromNavigator, getCoordsFromNavigatorError, mapOptions);
+getForecast()

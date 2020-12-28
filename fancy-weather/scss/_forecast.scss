@@ -1,7 +1,6 @@
 .container {
   position: relative;
   width: 95%;
-  //height: 90vh;
   background-color: $container-background;
   border-radius: 10px;
   margin: auto;
@@ -34,7 +33,6 @@
     @media screen and (max-width: 950px) {
       width: calc(100% - 390px);
     }
-
 
     @media screen and (max-width: 700px) {
       width: 80%;
@@ -79,11 +77,6 @@
       //width: 375px;
     }
   }
-}
-
-.map {
-  width: 100%;
-  height: 80%;
 }
 
 .button {
@@ -180,7 +173,7 @@
   background-color: $hover-color;
   color: $main-text-color;
   box-sizing: border-box;
-  
+
   &::placeholder {
     color: $main-text-color;
   }
@@ -239,24 +232,6 @@
     position: relative;
     width: 25%;
     height: auto;
-
-    &::after {
-      content: '';
-      position: absolute;
-      width: 100px;
-      height: 100px;
-      //background-image: url('../icons/snowy-2.svg');
-      background-size: cover;
-      top: 30px;
-      left: 30px;
-
-      @media screen and (max-width: 950px) {
-        width: 50px;
-        height: 50px;
-        top: 15px;
-        left: 15px;
-      }
-    }
   }
 
   &_today {
@@ -302,7 +277,7 @@
   }
 }
 
-#map {
+.map {
   border-radius: 20px;
   width: 100%;
   height: 80%;

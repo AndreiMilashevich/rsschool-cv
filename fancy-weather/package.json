@@ -26,6 +26,7 @@
     "webpack-cli": "^4.2.0"
   },
   "dependencies": {
+    "eslint": "^7.16.0",
     "mapbox-gl": "^2.0.1"
   }
 }
