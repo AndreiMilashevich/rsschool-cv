@@ -311,3 +311,25 @@
     left: 10%;
   }
 }
+
+.forecast_image {
+  z-index: 1;
+  position: absolute;
+  background-size: contain;
+  width: 100px;
+  height: 100px;
+  top: 15%;
+  left: 10%;
+
+  @media screen and (max-width: 950px) {
+    width: 75px;
+    height: 75px;
+  }
+
+  @media screen and (max-width: 400px) {
+    width: 50px;
+    height: 50px;
+    top: 30%;
+    left: 20%;
+  }
+}
