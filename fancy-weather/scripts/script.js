@@ -1,25 +1,32 @@
-import '../scss/index.scss'
+import '../scss/index.scss';
+import {setWeatherIcon} from '../scripts/setWeatherIcon.js' 
 
 //variables
-let city = ''
-let countryCode = 'by';
+let city;
+let countryCode;
 let latitude;
 let longitude;
 let countryName = ''
-let lang = 'ru';
-let tempFlag = 'c';
-let weatherData = 1;
+let lang;
+let tempFlag;
 let dataCodeRu = {};
-let tempNow = 270;
-let weatherDescription = 'rain';
-let feels = 8;
-let wind = 5;
-let humidity = 50;
+let tempNow = 274;
+let weatherDescription;
+let feels;
+let wind;
+let humidity;
+let timeZone = 0;
+
+const milisecondsInOneSecond = 1000;
+const minutesInOnedeg = 60;
+const KelvinsCelsiumsDifference = 273.15;
+const forecastStep = 8;
+const daysInWeek = 7;
+
 
 const forecastImage = document.querySelectorAll('.forecast_image');
 const dayOfWeek = document.querySelectorAll('.day_of_week');
 const otherDaysTemp = document.querySelectorAll('.temp_forecast');
-const searchSity = document.querySelector('.input_field');
 const refreshButton = document.querySelector('.button_refresh');
 const arrows = document.querySelector('.button_refresh_arrows');
 const time = document.querySelector('.time');
@@ -37,6 +44,8 @@ const weatherItem = document.querySelector('.weather_item');
 const lonDOM = document.querySelector('.lon');
 const latDOM = document.querySelector('.lat');
 const map = document.querySelector('.map');
+const buttonFarenheit = document.querySelector('.button_temp_f');
+const buttonCelsium = document.querySelector('.button_temp_c');
 
 
 const imageLinksLibrary = [
@@ -64,40 +73,39 @@ const dayOfWeekShortRu = ['Вск', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'С�
 const monthTitleEn = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 const monthTitleRu = ['Января', 'Февраля', 'Марта', 'Апреля', 'Мая', 'Июня', 'Июля', 'Августа', 'Сентября', 'Октября', 'Ноября', 'Декабря'];
 
-const urlWeather = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&lang=${lang}&appid=96e6b196f9fa76950df28c29b8eaa59c`;
-
 const mapOptions = {
   enableHighAccuracy: true,
   timeout: 5000,
   maximumAge: 0
 };
 
-
-
 //function declarations
 
 async function setBackground() {
-  try {
-    const url = 'https://api.unsplash.com/photos/random?query=morning&client_id=cZQGeB1ysDcDPOXSoOgZDe9uwqVNQ_cs0kCq7UmzMzA';
-    const res = await fetch(url);
-    const data = await res.json();
-    document.body.style.backgroundImage = `url(${data.urls.regular})`;
-  } catch(e) {
-    const num = Math.floor(Math.random() * imageLinksLibrary.length);
-    document.body.style.backgroundImage = `url(${imageLinksLibrary[num]})`;
-  } 
+    try {
+      const url = 'https://api.unsplash.com/photos/random?query=morning&client_id=cZQGeB1ysDcDPOXSoOgZDe9uwqVNQ_cs0kCq7UmzMzA';
+      const res = await fetch(url);
+      const data = await res.json();
+      document.body.style.backgroundImage = `url(${data.urls.regular})`;
+    } catch(e) {
+      setBackgroundFromLibrary();
+    } 
+  
 }
 
+function setBackgroundFromLibrary() {
+  const num = Math.floor(Math.random() * imageLinksLibrary.length);
+  document.body.style.backgroundImage = `url(${imageLinksLibrary[num]})`;
+}
 
 
 async function getCoordsFromNavigator(position) {
   const crd = await position.coords;
   latitude = parseFloat(crd.latitude).toPrecision(4);
   longitude = parseFloat(crd.longitude).toPrecision(4);
-  console.log(latitude, longitude)
-  getMap();   // attention
+  getMap(); 
   await getWeatherByCoord();
-  getForecast();  // attention
+  getForecast(); 
 }
 
 async function getCoordsFromNavigatorError(err) {
@@ -127,22 +135,20 @@ async function getPlaceByIp() {
 }
 
 function timeInsert() {
-  const timeNow = new Date();
-  const month = timeNow.getMonth();
-  const day = timeNow.getDay();
-  //const day = 0;
-  const date = timeNow.getDate();
-  const hour = timeNow.getHours();
-  const minutes = timeNow.getMinutes();
-  const seconds = timeNow.getSeconds();
+  const timeNow = new Date(Date.now() + timeZone*milisecondsInOneSecond);
+  const month = timeNow.getUTCMonth();
+  const day = timeNow.getUTCDay();
+  const date = timeNow.getUTCDate();
+  const hour = timeNow.getUTCHours();
+  const minutes = timeNow.getUTCMinutes();
+  const seconds = timeNow.getUTCSeconds();
   if (lang === 'en') {
     time.textContent = `${dayOfWeekShortEn[day]} ${date} ${monthTitleEn[month]} ${hour.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-    dayOfWeek.forEach((item, i) => {item.textContent = dayOfWeekEn[(i + 1 + day) % 7]})
+    dayOfWeek.forEach((item, i) => {item.textContent = dayOfWeekEn[(i + 1 + day) % daysInWeek]})
   } else {
     time.textContent = `${dayOfWeekShortRu[day]} ${date} ${monthTitleRu[month]} ${hour.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-    dayOfWeek.forEach((item, i) => {item.textContent = dayOfWeekRu[(i + 1 + day) % 7] })
+    dayOfWeek.forEach((item, i) => {item.textContent = dayOfWeekRu[(i + 1 + day) % daysInWeek] })
   }
-  
   setTimeout(timeInsert, 1000);
 }
 
@@ -155,13 +161,23 @@ function getLang() {
   }
 }
 
+function getTempScale() {
+  if (localStorage.getItem('tempFlag') === null) {
+    localStorage.setItem('tempFlag', 'c');
+    tempFlag = 'c';
+  } else {
+    tempFlag = localStorage.getItem('tempFlag');
+  }
+}
+
 function setContentRu() {
   langButton.textContent = 'RU';
-  inputField.placeholder = 'Найти город'
+  inputField.placeholder = 'Найти город';
+  searchButton.textContent = 'Найти';
   lang = 'ru';
   localStorage.setItem('lang','ru');
-  lonDOM.textContent = `долгота: ${Math.floor(longitude)}° ${Math.round((longitude % 1) * 60)}'`;
-  latDOM.textContent = `широта: ${Math.floor(latitude)}° ${Math.round((latitude % 1) * 60)}'`;
+  lonDOM.textContent = `долгота: ${Math.floor(longitude)}° ${Math.round((longitude % 1) * minutesInOnedeg)}'`;
+  latDOM.textContent = `широта: ${Math.floor(latitude)}° ${Math.round((latitude % 1) * minutesInOnedeg)}'`;
   getCountryByCode();
   cityDOM.textContent = `${city}, ${countryName}`;
   feelsDOM.textContent = `Ощущается: ${convertTemp(feels)}°`;
@@ -170,28 +186,33 @@ function setContentRu() {
 }
 
 async function setContentEn() {
+  await getCountryByCode();
   langButton.textContent = 'EN';
-    inputField.placeholder = 'Enter city'
-    lang = 'en';
-    localStorage.setItem('lang','en');
-    lonDOM.textContent = `longitude: ${Math.floor(longitude)}° ${Math.round((longitude % 1) * 60)}'`;
-    latDOM.textContent = `latitude: ${Math.floor(latitude)}° ${Math.round((latitude % 1) * 60)}'`;
-    await getCountryByCode();
-    cityDOM.textContent = `${city}, ${countryName}`;
-    feelsDOM.textContent = `Feels: ${convertTemp(feels)}°`;
-    windDOM.textContent = `Wind: ${wind} m/s`;
-    humidityDOM.textContent = `Humidity: ${humidity} %`;
+  inputField.placeholder = 'Enter city'
+  lang = 'en';
+  searchButton.textContent = 'Search';
+  localStorage.setItem('lang','en');
+  lonDOM.textContent = `longitude: ${Math.floor(longitude)}° ${Math.round((longitude % 1) * minutesInOnedeg)}'`;
+  latDOM.textContent = `latitude: ${Math.floor(latitude)}° ${Math.round((latitude % 1) * minutesInOnedeg)}'`;
+  cityDOM.textContent = `${city}, ${countryName}`;
+  feelsDOM.textContent = `Feels: ${convertTemp(feels)}°`;
+  windDOM.textContent = `Wind: ${wind} m/s`;
+  humidityDOM.textContent = `Humidity: ${humidity} %`;
 }
 
 function setPageContent() {
   if (lang === 'en') {
     setContentEn();
-    
   } else {
     setContentRu(); 
   }
   tempNowDOM.textContent = `${convertTemp(tempNow)}°`;
   weatherDescriptionDOM.textContent = weatherDescription;
+  if (tempFlag === 'c') {
+    buttonCelsium.classList.add('active');
+  } else {
+    buttonFarenheit.classList.add('active');
+  }
 }
 
 function switchPageContent() {
@@ -204,7 +225,7 @@ function switchPageContent() {
 
 function convertTemp(temp) {
   if (tempFlag === 'c') {
-    return Math.round(temp - 273.15)
+    return Math.round(temp - KelvinsCelsiumsDifference)
   } else {
     return Math.round((temp * 9 / 5) - 459.67) // converting Kelvins to Fahrenheit
   }
@@ -248,67 +269,92 @@ async function getCountryByCode() {
      }
     }
   } else if (lang === 'en') {
-      const url = `https://restcountries.eu/rest/v2/alpha/${countryCode}`;
-      const res = await fetch(url);
-      const data = await res.json();
-      countryName = data.name;   
-      console.log(data.name);
-      return countryName;
-    }
+      try {
+        const url = `https://restcountries.eu/rest/v2/alpha/${countryCode}`;
+        const res = await fetch(url);
+        const data = await res.json();
+        countryName = data.name;   
+        console.log(data.name);
+        return countryName;
+      } catch {
+        console.log('Oops, something went wrong!!! Probably, such  country code does not exist!');
+      } 
+  }
 }
 
+
+
 async function getForecast() {
-  const url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&lang=${lang}&cnt=25&appid=96e6b196f9fa76950df28c29b8eaa59c`;
-  const res = await fetch(url);
-  const data = await res.json();
-  console.log(data); 
-  otherDaysTemp.forEach((item, i) => {
-    item.textContent = `${convertTemp(data.list[(i + 1) * 8].main.temp)}°`;
-  });
-  forecastImage.forEach((item, i) => {
-    setWeatherIcon(data.list[(i + 1) * 8].weather[0].main, item)
-  }); 
+  try { 
+    const url = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&lang=${lang}&cnt=25&appid=96e6b196f9fa76950df28c29b8eaa59c`;
+    const res = await fetch(url);
+    const data = await res.json();
+    otherDaysTemp.forEach((item, i) => {
+      item.textContent = `${convertTemp(data.list[(i + 1) * forecastStep].main.temp)}°`;
+    });
+    forecastImage.forEach((item, i) => {
+      setWeatherIcon(data.list[(i + 1) * 8].weather[0].main, item)
+    }); 
+  } catch {
+    console.log('Oops, something went wrong!!! Probably, can not find weather  exist!');
+  }
 }
 
 
 async function getWeatherByCoord() {
-  const url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&lang=${lang}&appid=96e6b196f9fa76950df28c29b8eaa59c`;
-  const res = await fetch(url);
-  const data = await res.json();
-  weatherDescription = data.weather[0].description;
-  humidity = data.main.humidity;
-  feels = data.main.feels_like;
-  wind = data.wind.speed;
-  console.log(weatherDescription);
-  countryCode = data.sys.country;
-  city = data.name;
-  tempNow = data.main.temp;
-  setPageContent();
-  setWeatherIcon(data.weather[0].main, weatherNowIcon);
-  console.log(data);
-  console.log(city);
+  try {
+    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&lang=${lang}&appid=96e6b196f9fa76950df28c29b8eaa59c`;
+    const res = await fetch(url);
+    const info = await res.json();
+    getServiceInfo(info);
+    setPageContent();
+    setWeatherIcon(weatherDescription, weatherNowIcon);
+  } catch {
+    console.log('Oops, something went wrong!!! Probably, can not find weather  exist!');
+  } 
 }
 
-
-async function getWeatherByCity() {
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&lang=${lang}&appid=96e6b196f9fa76950df28c29b8eaa59c`;
-  const res = await fetch(url);
-  const data = await res.json();
+function getServiceInfo(data) {
   weatherDescription = data.weather[0].description;
   humidity = data.main.humidity;
   feels = data.main.feels_like;
   wind = data.wind.speed;
   city = data.name;
-  console.log(weatherDescription);
+  tempNow = data.main.temp;
   countryCode = data.sys.country;
   latitude = data.coord.lat;
   longitude = data.coord.lon;
-  console.log(data);
-  countryCode = data.sys.country;
-  await getCountryByCode(countryCode);
-  setPageContent();
-  //setWeather(data, countryName);
-  //getMap();
+  timeZone = data.timezone;
+}
+
+async function getWeatherByCity() {
+  try {
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&lang=${lang}&appid=96e6b196f9fa76950df28c29b8eaa59c`;
+    const res = await fetch(url);
+    const info = await res.json();
+    getServiceInfo(info);
+    await getCountryByCode(countryCode);
+    setPageContent();
+    setWeatherIcon(weatherDescription, weatherNowIcon);
+  } catch {
+    if (lang === 'en') {
+      alert('Oops, something went wrong!!! Probably, such  city does not exist!');
+    } else {
+      alert('Упс, что-то пошло не так!!! Наверное, такого города не существует!');
+    }
+  }
+}
+
+async function searchCity() {
+  city = inputField.value;
+  await getWeatherByCity();
+  await setBackground();
+  getMap();
+  getForecast();
+  if (city === 'мачулищи' || city === 'machulishchy') {
+    setBackgroundFromLibrary();
+  } 
+  inputField.value = '';
 }
 
 //functions call
@@ -322,133 +368,38 @@ navigator.geolocation.getCurrentPosition(getCoordsFromNavigator, getCoordsFromNa
 setBackground();
 timeInsert();
 getLang();
+getTempScale();
 setPageContent();
 getCountryCodeDataRu();
 getCountryByCode();
-console.log(countryCode);
+
 langButton.addEventListener('click', () => {
   switchPageContent();
-  getWeatherByCity();
+  getWeatherByCoord();
 });
 
+searchButton.addEventListener('click', searchCity)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// searchButton.addEventListener('click', () => {
-//     searchCity();  
-// });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// async function getWeatherByCity() {
-//   let searchSity = document.querySelector('.input_field');
-//   const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&lang=${language}&appid=96e6b196f9fa76950df28c29b8eaa59c`;
-//   const res = await fetch(url);
-//   const data = await res.json();
-//   latitude = data.coord.lat;
-//   longitude = data.coord.lon;
-//   console.log(data);
-//   countryCode = data.sys.country;
-//   await getCountryByCode(countryCode);
-//   setWeather(data, countryName);
-//   getMap();
-// }
-
-
-
-function setWeatherIcon(weather, item) {
-  switch(weather) {
-    case('Snow'):
-    item.style.backgroundImage = "url('../icons/snow.svg')";
-    break;
-    case('Thunderstorm'):
-    item.style.backgroundImage = "url('../icons/thunderstorms.svg')";
-    break;
-    case('Drizzle'):
-    item.style.backgroundImage = "url('../icons/drizzle.svg')";
-    break;
-    case('Fog'):
-    item.style.backgroundImage = "url('../icons/mist.svg')";
-    break;
-    case('Haze'):
-    item.style.backgroundImage = "url('../icons/mist.svg')";
-    break;
-    case('Clean'):
-    item.style.backgroundImage = "url('../icons/clear-day.svg')";
-    break;
-    case('Clouds'):
-    item.style.backgroundImage = "url('../icons/cloudy.svg')";
-    break;
-    case('Rain'):
-    item.style.backgroundImage = "url('../icons/rain.svg')";
-    break;
-    default:
-    item.style.backgroundImage = "url('../icons/partly-cloudy-day.svg')";
+window.addEventListener('keydown', (e) => {
+  if (e.keyCode === 13) {
+    searchCity();
   }
-}
+})
 
+buttonCelsium.addEventListener('click', () => {
+  tempFlag = 'c';
+  buttonCelsium.classList.add('active');
+  buttonFarenheit.classList.remove('active');
+  setPageContent();
+  getForecast();
+  localStorage.setItem('tempFlag', 'c');
+});
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+buttonFarenheit.addEventListener('click', () => {
+  tempFlag = 'f';
+  buttonCelsium.classList.remove('active');
+  buttonFarenheit.classList.add('active');
+  getForecast();
+  setPageContent();
+  localStorage.setItem('tempFlag', 'f');
+});
