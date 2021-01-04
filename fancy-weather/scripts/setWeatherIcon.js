@@ -27,4 +27,4 @@ export function setWeatherIcon(weather, item) {
       default:
       item.style.backgroundImage = "url('../icons/partly-cloudy-day.svg')";
     }
-}
+  }

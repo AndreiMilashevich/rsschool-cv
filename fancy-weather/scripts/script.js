@@ -16,6 +16,7 @@ let feels;
 let wind;
 let humidity;
 let timeZone = 0;
+let main;
 
 const milisecondsInOneSecond = 1000;
 const minutesInOnedeg = 60;
@@ -186,10 +187,11 @@ function setContentRu() {
 }
 
 async function setContentEn() {
+  lang = 'en';
   await getCountryByCode();
   langButton.textContent = 'EN';
   inputField.placeholder = 'Enter city'
-  lang = 'en';
+  
   searchButton.textContent = 'Search';
   localStorage.setItem('lang','en');
   lonDOM.textContent = `longitude: ${Math.floor(longitude)}° ${Math.round((longitude % 1) * minutesInOnedeg)}'`;
@@ -274,8 +276,6 @@ async function getCountryByCode() {
         const res = await fetch(url);
         const data = await res.json();
         countryName = data.name;   
-        console.log(data.name);
-        return countryName;
       } catch {
         console.log('Oops, something went wrong!!! Probably, such  country code does not exist!');
       } 
@@ -307,8 +307,9 @@ async function getWeatherByCoord() {
     const res = await fetch(url);
     const info = await res.json();
     getServiceInfo(info);
+    console.log(info);
     setPageContent();
-    setWeatherIcon(weatherDescription, weatherNowIcon);
+    setWeatherIcon(main, weatherNowIcon);
   } catch {
     console.log('Oops, something went wrong!!! Probably, can not find weather  exist!');
   } 
@@ -316,6 +317,7 @@ async function getWeatherByCoord() {
 
 function getServiceInfo(data) {
   weatherDescription = data.weather[0].description;
+  main = data.weather[0].main;
   humidity = data.main.humidity;
   feels = data.main.feels_like;
   wind = data.wind.speed;
@@ -335,7 +337,7 @@ async function getWeatherByCity() {
     getServiceInfo(info);
     await getCountryByCode(countryCode);
     setPageContent();
-    setWeatherIcon(weatherDescription, weatherNowIcon);
+    setWeatherIcon(main, weatherNowIcon);
   } catch {
     if (lang === 'en') {
       alert('Oops, something went wrong!!! Probably, such  city does not exist!');
@@ -351,9 +353,6 @@ async function searchCity() {
   await setBackground();
   getMap();
   getForecast();
-  if (city === 'мачулищи' || city === 'machulishchy') {
-    setBackgroundFromLibrary();
-  } 
   inputField.value = '';
 }
 
