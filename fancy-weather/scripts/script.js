@@ -401,7 +401,7 @@ async function getWeatherByCity() {
 async function searchCity() {
   city = inputField.value;
   await getWeatherByCity();
-  await setBackground();
+  setBackground();
   getMap();
   getForecast();
   inputField.value = "";
