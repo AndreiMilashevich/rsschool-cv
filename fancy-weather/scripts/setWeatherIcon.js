@@ -4,7 +4,7 @@ export function setWeatherIcon(weather, item) {
       item.style.backgroundImage = "url('../icons/snow.svg')";
       break;
       case('Thunderstorm'):
-      item.style.backgroundImage = "url('../icons/thunderstorms.svg')";
+      item.style.backgroundImage = "url('../icons/thunder.svg')";
       break;
       case('Drizzle'):
       item.style.backgroundImage = "url('../icons/drizzle.svg')";
