@@ -2,13 +2,13 @@ import "../scss/index.scss";
 import { setWeatherIcon } from "../scripts/setWeatherIcon.js";
 
 let city;
-let countryCode;
+let countryCode = 'by';
 let latitude;
 let longitude;
 let countryName = "";
 let lang;
 let tempFlag;
-let dataCodeRu = {};
+let dataCodeRu = [];
 let tempNow = 274;
 let weatherDescription;
 let feels;
@@ -39,12 +39,14 @@ const windDOM = document.querySelector(".wind");
 const humidityDOM = document.querySelector(".humidity");
 const weatherDescriptionDOM = document.querySelector(".weather_description");
 const weatherNowIcon = document.querySelector(".weather_image_main");
-const weatherItem = document.querySelector(".weather_item");
 const lonDOM = document.querySelector(".lon");
 const latDOM = document.querySelector(".lat");
-const map = document.querySelector(".map");
 const buttonFarenheit = document.querySelector(".button_temp_f");
 const buttonCelsium = document.querySelector(".button_temp_c");
+
+const urlImage = "https://api.unsplash.com/photos/random?query=morning&client_id=cZQGeB1ysDcDPOXSoOgZDe9uwqVNQ_cs0kCq7UmzMzA";
+const urlIp = "https://ipinfo.io/json?token=cb5f57499775d8";
+const urlCodeRu = `../countries.json`;
 
 const imageLinksLibrary = [
   "https://cdn.photosight.ru/img/4/a2d/5942981_xlarge.jpg",
@@ -121,9 +123,7 @@ const mapOptions = {
 
 async function setBackground() {
   try {
-    const url =
-      "https://api.unsplash.com/photos/random?query=morning&client_id=cZQGeB1ysDcDPOXSoOgZDe9uwqVNQ_cs0kCq7UmzMzA";
-    const res = await fetch(url);
+    const res = await fetch(urlImage);
     const data = await res.json();
     document.body.style.backgroundImage = `url(${data.urls.regular})`;
   } catch (e) {
@@ -154,8 +154,7 @@ async function getCoordsFromNavigatorError(err) {
 
 async function getPlaceByIp() {
   try {
-    const url = "https://ipinfo.io/json?token=cb5f57499775d8";
-    const resp = await fetch(url);
+    const resp = await fetch(urlIp);
     const data = await resp.json();
     city = data.city;
     countryCode = data.country;
@@ -287,33 +286,23 @@ function getMap() {
 }
 
 async function getCountryCodeDataRu() {
-  const url = `../countries.json`;
-  const responce = await fetch(url);
+  const responce = await fetch(urlCodeRu);
   const data = await responce.json();
   dataCodeRu = data;
 }
 
 async function getCountryByCode() {
   if (lang === "ru") {
-    for (let i = 0; i < dataCodeRu.length; i++) {
-      if (dataCodeRu[i].ALFA2 === countryCode) {
-        countryName = dataCodeRu[i].SHORTNAME;
-        countryName = countryName.split(" ");
-        for (let i = 0; i < countryName.length; i++) {
-          countryName[i] = countryName[i].split("");
-          for (let j = 1; j < countryName[i].length; j++) {
-            countryName[i][j] = countryName[i][j].toLowerCase();
-          }
-          countryName[i] = countryName[i].join("");
-        }
-        countryName = countryName.join(" ");
+    dataCodeRu.forEach((item) => {
+      if (item.ALFA2 === countryCode) {
+        countryName = item.FULLNAME;
         return;
       }
-    }
+    })
   } else if (lang === "en") {
     try {
-      const url = `https://restcountries.eu/rest/v2/alpha/${countryCode}`;
-      const res = await fetch(url);
+      const urlCodeEn = `https://restcountries.eu/rest/v2/alpha/${countryCode}`;
+      const res = await fetch(urlCodeEn);
       const data = await res.json();
       countryName = data.name;
     } catch {
@@ -334,7 +323,7 @@ async function getForecast() {
         data.list[(i + 1) * forecastStep].main.temp)}°`;
     });
     forecastImage.forEach((item, i) => {
-      setWeatherIcon(data.list[(i + 1) * 8].weather[0].main, item);
+      setWeatherIcon(data.list[(i + 1) * forecastStep].weather[0].main, item);
     });
   } catch {
     console.log(
@@ -359,17 +348,29 @@ async function getWeatherByCoord() {
 }
 
 function getServiceInfo(data) {
-  weatherDescription = data.weather[0].description;
-  weatherStamp = data.weather[0].main;
-  humidity = data.main.humidity;
-  feels = data.main.feels_like;
-  wind = data.wind.speed;
-  city = data.name;
-  tempNow = data.main.temp;
-  countryCode = data.sys.country;
-  latitude = data.coord.lat;
-  longitude = data.coord.lon;
-  timeZone = data.timezone;
+  ({
+    weather: [{
+      description: weatherDescription,
+      main: weatherStamp
+    }],
+    main: {
+      humidity: humidity,
+      feels_like: feels,
+      temp: tempNow
+    },
+    wind: {
+      speed: wind
+    },
+    name: city,
+    sys: {
+      country: countryCode
+    },
+    coord: {
+      lat: latitude,
+      lon: longitude
+    },
+    timezone: timeZone
+  } = data);
 }
 
 async function getWeatherByCity() {
@@ -412,9 +413,7 @@ setBackground();
 timeInsert();
 getLang();
 getTempScale();
-setPageContent();
 getCountryCodeDataRu();
-getCountryByCode();
 
 refreshButton.addEventListener("click", () => {
   setBackground();
