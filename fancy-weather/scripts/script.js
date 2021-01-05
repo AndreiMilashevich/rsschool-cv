@@ -1,7 +1,6 @@
 import "../scss/index.scss";
 import { setWeatherIcon } from "../scripts/setWeatherIcon.js";
 
-//variables
 let city;
 let countryCode;
 let latitude;
@@ -120,8 +119,6 @@ const mapOptions = {
   maximumAge: 0,
 };
 
-//function declarations
-
 async function setBackground() {
   try {
     const url =
@@ -236,7 +233,6 @@ async function setContentEn() {
   await getCountryByCode();
   langButton.textContent = "EN";
   inputField.placeholder = "Enter city";
-
   searchButton.textContent = "Search";
   localStorage.setItem("lang", "en");
   lonDOM.textContent = `longitude: ${Math.floor(longitude)}° ${Math.round((longitude % 1) * minutesInOnedeg)}'`;
