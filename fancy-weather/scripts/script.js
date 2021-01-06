@@ -293,12 +293,7 @@ async function getCountryCodeDataRu() {
 
 async function getCountryByCode() {
   if (lang === "ru") {
-    dataCodeRu.forEach((item) => {
-      if (item.ALFA2 === countryCode) {
-        countryName = item.FULLNAME;
-        return;
-      }
-    })
+   countryName = dataCodeRu.find((item) => item.ALFA2 === countryCode).FULLNAME;
   } else if (lang === "en") {
     try {
       const urlCodeEn = `https://restcountries.eu/rest/v2/alpha/${countryCode}`;
