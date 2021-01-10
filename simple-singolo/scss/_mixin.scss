@@ -1,0 +1,27 @@
+@mixin container($width) {
+  width: $width;
+  margin: 0 auto;
+}
+
+@mixin header-footer-flex {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+@mixin social-media($horisontal, $vertical) {
+  width: 32px;
+  height: 33px;
+  background: url('../images/css_sprites.png') $horisontal $vertical;
+}
+
+@mixin paragraph($horisontal, $vertical) {
+  content: '';
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+  background: url('../images/css_sprites.png') $horisontal $vertical;
+  position: absolute;
+  left: 0;
+  top: 0;
+}

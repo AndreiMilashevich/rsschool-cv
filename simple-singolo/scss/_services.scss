@@ -1,0 +1,81 @@
+.services {
+  color: $services-text;
+}
+
+.services_list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  text-align: justify;
+  padding: 42px 40px 52px;
+
+  @media screen and (max-width: $desktop) {
+    justify-content: space-around;
+    padding-right: 0;
+  }
+
+  @media screen and (max-width: $tablet) {
+    display: block;
+    padding-left: 30px;
+  }
+}
+
+h3 {
+  font-size: 1.8rem;
+  margin-top: 0;
+}
+
+.design::before {
+  @include paragraph(-170px, -90px);
+}
+
+.ideas::before {
+  @include paragraph(-90px, -90px);
+}
+
+.star::before {
+  @include paragraph(-90px, -10px);
+}
+
+.love::before {
+  @include paragraph(-10px, -10px);
+}
+
+.responsive::before {
+  @include paragraph(-170px, -10px);
+}
+
+.support::before {
+  @include paragraph(-10px, -90px);
+}
+
+.service-item {
+  height: 104px;
+  width: 220px;
+  overflow: hidden;
+  padding-left: 70px;
+  position: relative;
+  margin-bottom: 20px;
+
+  @media screen and (max-width: $desktop) {
+    padding-right: 25px;
+    width: calc((100% - 100px) / 3);
+  }
+
+  @media screen and (max-width: $tablet) {
+    width: calc(90% - 100px);
+  }
+
+  p {
+    font-size: 1.2rem;
+    line-height: 2.2rem;
+    margin: 0;
+    text-overflow: clip;
+  }
+}
+
+.summary {
+  text-align: justify;
+  padding-right: 40px;
+  line-height: 3rem;
+}

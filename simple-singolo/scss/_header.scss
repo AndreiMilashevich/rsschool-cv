@@ -1,0 +1,184 @@
+header {
+  background-color: $main-color;
+  width: 100%;
+  border-bottom: 6px solid $header-border;
+  font-weight: bold;
+  position: fixed;
+  top: 0;
+  z-index: 100;
+  min-height: 79px;
+}
+
+.menu {
+  padding-right: 40px;
+  margin: 0;
+
+  @media screen and (max-width: $tablet) {
+    display: none;
+  }
+}
+
+.main_menu {
+  text-decoration: none;
+  color: $header_text;
+}
+
+.main_menu_v {
+  text-decoration: none;
+  color: $header_text;
+  transition: 0.3s;
+}
+
+.menu_item {
+  color: $header-text;
+  display: inline-block;
+  text-transform: uppercase;
+  font-size: 1.2rem;
+  padding-top: 42px;
+  padding-bottom: 39px;
+  cursor: pointer;
+
+  &::before {
+    content: '\2022';
+    display: inline-block;
+    padding: 0 15px;
+    font-size: 0.5rem;
+    vertical-align: middle;
+  }
+}
+
+.menu_item:first-child::before {
+  content: '';
+}
+
+.header {
+  @include header-footer-flex;
+
+  @media screen and (max-width: $tablet) {
+    justify-content: center;
+  }
+}
+
+h1 {
+  color: $header-text;
+  margin: 0;
+  padding: 29px 0 41px 40px;
+  text-transform: uppercase;
+  font-size: 2.5rem;
+  line-height: 3rem;
+  font-weight: bold;
+
+  @media screen and (max-width: $tablet) {
+    padding: 24px 0 25px;
+    font-size: 2rem;
+  }
+}
+
+.singolo {
+  color: $header-text;
+  margin: 0;
+  padding: 0;
+  text-transform: uppercase;
+  font-size: 2.5rem;
+  line-height: 3rem;
+  font-weight: bold;
+  display: none;
+}
+
+span {
+  color: $slider-color;
+  vertical-align: top;
+  font-weight: bold;
+}
+
+.burger {
+  display: none;
+
+  @media screen and (max-width: $tablet) {
+    display: block;
+    position: absolute;
+    z-index: 300;
+    width: 25px;
+    height: 20px;
+    left: 25px;
+    top: 25px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+}
+
+.burger-line {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 25px;
+  height: 2px;
+  z-index: 251;
+  background-color: $header-text;
+}
+
+.second {
+  top: 10px;
+}
+
+.third {
+  top: 20px;
+}
+
+.rotate {
+  transform: rotate(90deg);
+  z-index: 251;
+  transition: 0.3s;
+}
+
+.mobile-menu {
+  position: fixed;
+  z-index: 250;
+  left: 0;
+  width: 75%;
+  height: 100%;
+  background-color: $main-color;
+  transition: 0.2s;
+  box-shadow: 0 85px 0 200px rgba(0, 0, 0, 0.4), 0 0 20px 0 rgba(0, 0, 0, 1);
+}
+
+.hidden {
+  display: none;
+}
+
+.move-left {
+  position: absolute;
+  z-index: 300;
+  transition: 1s;
+  transform: translate(calc(-100% + 40px), 0);
+}
+
+.menu-vertical {
+  display: block;
+  position: fixed;
+  z-index: 350;
+  list-style: none;
+  text-transform: uppercase;
+  left: 10%;
+  top: 25%;
+  font-size: 2.4rem;
+  padding-top: 10px;
+}
+
+.menu_item_v {
+  padding-bottom: 25px;
+  cursor: pointer;
+}
+
+.close {
+  width: 0;
+  height: 0;
+  transition: 0.3s;
+  box-shadow: none;
+  color: rgba(255, 255, 255, 0);
+  font-size: 0;
+}
+
+.active {
+  color: $slider-color;
+}

@@ -1,0 +1,30 @@
+html {
+  font-size: 10px;
+}
+
+body {
+  font-family: 'Lato', sans-serif;
+  margin: 0;
+}
+
+.container {
+  @include container(1020px);
+
+  position: relative;
+
+  @media screen and (max-width: $desktop) {
+    width: 100%;
+  }
+}
+
+li {
+  list-style: none;
+}
+
+ul {
+  margin: 0;
+}
+
+.no-scroll {
+  overflow: hidden;
+}

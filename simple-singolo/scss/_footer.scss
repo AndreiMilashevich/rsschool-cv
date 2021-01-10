@@ -1,0 +1,86 @@
+footer {
+  background-color: $main-color;
+  border-top: 6px solid $header-border;
+  width: 100%;
+  margin: 0;
+}
+
+.social {
+  &_media_container {
+    display: flex;
+    flex-direction: row;
+    padding: 22px 42px;
+  }
+
+  &_icon {
+    margin-left: 8px;
+  }
+}
+
+.footer {
+  @include header-footer-flex;
+
+  @media screen and (max-width: $tablet) {
+    justify-content: center;
+  }
+}
+
+.copyright {
+  color: $portfolio-text;
+  padding: 30px 0 29px 40px;
+  font-size: 1.3rem;
+
+  @media screen and (max-width: $tablet) {
+    display: none;
+  }
+}
+
+.link {
+  &_facebook {
+    @include social-media(-250px, -169px);
+
+    &:hover {
+      @include social-media(-166px, -170px);
+    }
+
+    &:active {
+      @include social-media(-166px, -223px);
+    }
+  }
+
+  &_google {
+    @include social-media(-250px, -116px);
+
+    &:hover {
+      @include social-media(-114px, -170px);
+    }
+
+    &:active {
+      @include social-media(-114px, -223px);
+    }
+  }
+
+  &_twitter {
+    @include social-media(-250px, -63px);
+
+    &:hover {
+      @include social-media(-62px, -170px);
+    }
+
+    &:active {
+      @include social-media(-62px, -223px);
+    }
+  }
+
+  &_linkedin {
+    @include social-media(-250px, -10px);
+
+    &:hover {
+      @include social-media(-10px, -170px);
+    }
+
+    &:active {
+      @include social-media(-10px, -223px);
+    }
+  }
+}
