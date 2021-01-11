@@ -6,12 +6,12 @@
   margin: auto;
   padding: 20px;
 
-  @media screen and (max-width: 950px) {
+  @media screen and (max-width: $max-width) {
     width: 90%;
   }
 
-  @media screen and (max-width: 950px) {
-    width: 90%;
+  @media screen and (max-width: $max-width) {
+    width: 80%;
   }
 
   &_forecast {
@@ -19,7 +19,7 @@
     justify-content: space-between;
     margin-top: 40px;
 
-    @media screen and (max-width: 700px) {
+    @media screen and (max-width: $middle-width) {
       flex-direction: column;
       align-items: center;
     }
@@ -30,11 +30,11 @@
     height: auto;
     margin: 20px 15px 0 25px;
 
-    @media screen and (max-width: 950px) {
+    @media screen and (max-width: $max-width) {
       width: calc(100% - 390px);
     }
 
-    @media screen and (max-width: 700px) {
+    @media screen and (max-width: $middle-width) {
       width: 80%;
       height: 250px;
     }
@@ -45,11 +45,11 @@
     display: flex;
     flex-direction: column;
 
-    @media screen and (max-width: 950px) {
+    @media screen and (max-width: $max-width) {
       width: 350px;
     }
 
-    @media screen and (max-width: 400px) {
+    @media screen and (max-width: $middle-width) {
       width: 300px;
     }
   }
@@ -60,7 +60,7 @@
     width: 100%;
     box-sizing: border-box;
 
-    @media screen and (max-width: 700px) {
+    @media screen and (max-width: $middle-width) {
       flex-direction: column;
       align-items: center;
     }
@@ -74,7 +74,6 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      //width: 375px;
     }
   }
 }
@@ -96,7 +95,7 @@
     margin-right: 0;
   }
 
-  @media screen and (max-width: 700px) {
+  @media screen and (max-width: $middle-width) {
     margin: 5px 25px 5px 0;
   }
 
@@ -171,7 +170,7 @@
     box-shadow: 0 0 5px $main-text-color;
   }
 
-  @media screen and (max-width: 700px) {
+  @media screen and (max-width: $middle-width) {
     width: 90px;
   }
 }
@@ -200,7 +199,7 @@
     color: $main-text-color;
   }
 
-  @media screen and (max-width: 700px) {
+  @media screen and (max-width: $middle-width) {
     width: 155px;
   }
 
@@ -215,13 +214,13 @@
   font-size: 3rem;
   margin: 10px 0;
 
-  @media screen and (max-width: 700px) {
+  @media screen and (max-width: $middle-width) {
     text-align: center;
   }
 }
 
 .time {
-  @media screen and (max-width: 700px) {
+  @media screen and (max-width: $middle-width) {
     text-align: center;
   }
 }
@@ -235,7 +234,7 @@
   font-size: 20rem;
   font-weight: bold;
 
-  @media screen and (max-width: 400px) {
+  @media screen and (max-width: $min-width) {
     font-size: 12rem;
   }
 }
@@ -245,7 +244,7 @@
     display: flex;
     justify-content: space-between;
 
-    @media screen and (max-width: 400px) {
+    @media screen and (max-width: $min-width) {
       width: 80%;
       margin: 0 auto;
     }
@@ -270,7 +269,7 @@
     padding-bottom: 50px;
     position: relative;
 
-    @media screen and (max-width: 950px) {
+    @media screen and (max-width: $max-width) {
       padding-bottom: 20px;
     }
 
@@ -283,14 +282,14 @@
       top: -160px;
       left: -20px;
 
-      @media screen and (max-width: 950px) {
+      @media screen and (max-width: $max-width) {
         width: 100px;
         height: 100px;
         top: -80px;
         left: 0;
       }
 
-      @media screen and (max-width: 400px) {
+      @media screen and (max-width: $min-width) {
         width: 75px;
         height: 75px;
         top: -60px;
@@ -324,14 +323,14 @@
   top: -110%;
   left: -10px;
 
-  @media screen and (max-width: 950px) {
+  @media screen and (max-width: $max-width) {
     width: 100px;
     height: 100px;
     top: -90%;
     left: 0;
   }
 
-  @media screen and (max-width: 400px) {
+  @media screen and (max-width: $min-width) {
     width: 75px;
     height: 75px;
     top: -60%;
@@ -346,18 +345,17 @@
   width: 100px;
   height: 100px;
   top: 15%;
-  left: 10%;
+  left: 30%;
 
-  @media screen and (max-width: 950px) {
+  @media screen and (max-width: $max-width) {
     width: 75px;
     height: 75px;
   }
 
-  @media screen and (max-width: 400px) {
+  @media screen and (max-width: $min-width) {
     width: 50px;
     height: 50px;
     top: 30%;
-    left: 20%;
   }
 }
 

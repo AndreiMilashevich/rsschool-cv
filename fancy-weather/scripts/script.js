@@ -17,6 +17,7 @@ let wind;
 let humidity;
 let timeZone = 0;
 let weatherStamp;
+let alertMessage;
 
 const milisecondsInOneSecond = 1000;
 const minutesInOnedeg = 60;
@@ -70,7 +71,7 @@ const dayOfWeekEn = [
   "Monday",
   "Tuesday",
   "Wednesday",
-  "Thurday",
+  "Thursday",
   "Friday",
   "Saturday",
 ];
@@ -196,26 +197,26 @@ function timeInsert() {
   setTimeout(timeInsert, 1000);
 }
 
-function getLang() {
-  if (localStorage.getItem("lang") === null) {
-    localStorage.setItem("lang", "en");
-    lang = en;
+function getLocalStorageData(dataType, data) {
+  if (localStorage.getItem(dataType) === null) {
+    localStorage.setItem(dataType, data);
+    dataType = data;
   } else {
-    lang = localStorage.getItem("lang");
+    dataType = localStorage.getItem(dataType);
   }
+}
+
+function getLang() {
+  getLocalStorageData('lang', 'en')
+  timeInsert();
 }
 
 function getTempScale() {
-  if (localStorage.getItem("tempFlag") === null) {
-    localStorage.setItem("tempFlag", "c");
-    tempFlag = "c";
-  } else {
-    tempFlag = localStorage.getItem("tempFlag");
-  }
+  getLocalStorageData('tempFlag', 'c')
 }
 
 function setContentRu() {
-  langButton.textContent = "RU";
+  alertMessage = "Упс, что-то пошло не так!!! Наверное, такого города не существует!";
   inputField.placeholder = "Найти город";
   searchButton.textContent = "Найти";
   lang = "ru";
@@ -232,11 +233,10 @@ function setContentRu() {
 }
 
 async function setContentEn() {
+  alertMessage = "Oops, something went wrong!!! Probably, such  city does not exist!";
   lang = "en";
   await getCountryByCode();
-  langButton.textContent = "EN";
   inputField.placeholder = "Enter city";
-
   searchButton.textContent = "Search";
   localStorage.setItem("lang", "en");
   lonDOM.textContent = `longitude: ${Math.floor(longitude)}° ${Math.round((longitude % 1) * minutesInOnedeg)}'`;
@@ -260,6 +260,7 @@ function setPageContent() {
   } else {
     buttonFarenheit.classList.add("active");
   }
+  langButton.textContent = lang.toUpperCase();
 }
 
 function switchPageContent() {
@@ -386,15 +387,7 @@ async function getWeatherByCity() {
     setPageContent();
     setWeatherIcon(weatherStamp, weatherNowIcon);
   } catch {
-    if (lang === "en") {
-      alert(
-        "Oops, something went wrong!!! Probably, such  city does not exist!"
-      );
-    } else {
-      alert(
-        "Упс, что-то пошло не так!!! Наверное, такого города не существует!"
-      );
-    }
+      alert(alertMessage);
   }
 }
 
@@ -413,7 +406,6 @@ navigator.geolocation.getCurrentPosition(
   mapOptions
 );
 setBackground();
-timeInsert();
 getLang();
 getTempScale();
 setPageContent();
