@@ -203,7 +203,6 @@ function getLang() {
   } else {
     lang = localStorage.getItem("lang");
   }
-  timeInsert();
 }
 
 function getTempScale() {
@@ -414,6 +413,7 @@ navigator.geolocation.getCurrentPosition(
   mapOptions
 );
 setBackground();
+timeInsert();
 getLang();
 getTempScale();
 setPageContent();
