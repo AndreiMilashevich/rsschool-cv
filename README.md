@@ -1,1 +1,1 @@
- https://andreimilashevich.github.io/rsschool-cv/
+ https://andreimilashevich.github.io/rsschool-cv/fancy-weather/build/index
