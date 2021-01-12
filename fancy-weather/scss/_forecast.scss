@@ -261,7 +261,7 @@
     display: flex;
     align-items: flex-end;
     justify-content: center;
-    padding-top: 40px;
+    padding-top: 60px;
   }
 
   &_now {
@@ -271,30 +271,6 @@
 
     @media screen and (max-width: $max-width) {
       padding-bottom: 20px;
-    }
-
-    &::before {
-      content: '';
-      position: absolute;
-      width: 200px;
-      height: 200px;
-      background-size: 100% 100%;
-      top: -160px;
-      left: -20px;
-
-      @media screen and (max-width: $max-width) {
-        width: 100px;
-        height: 100px;
-        top: -80px;
-        left: 0;
-      }
-
-      @media screen and (max-width: $min-width) {
-        width: 75px;
-        height: 75px;
-        top: -60px;
-        left: 0;
-      }
     }
   }
 }
@@ -320,7 +296,7 @@
   background-size: contain;
   width: 200px;
   height: 200px;
-  top: -110%;
+  top: -100%;
   left: -10px;
 
   @media screen and (max-width: $max-width) {

@@ -200,19 +200,19 @@ function timeInsert() {
 function getLocalStorageData(dataType, data) {
   if (localStorage.getItem(dataType) === null) {
     localStorage.setItem(dataType, data);
-    dataType = data;
+    return data;
   } else {
-    dataType = localStorage.getItem(dataType);
+    return localStorage.getItem(dataType);
   }
 }
 
 function getLang() {
-  getLocalStorageData('lang', 'en')
+  lang = getLocalStorageData('lang', 'en')
   timeInsert();
 }
 
 function getTempScale() {
-  getLocalStorageData('tempFlag', 'c')
+  tempFlag = getLocalStorageData('tempFlag', 'c')
 }
 
 function setContentRu() {
