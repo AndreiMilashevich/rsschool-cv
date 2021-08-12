@@ -1,5 +1,5 @@
 body {
-  background-color: lightgoldenrodyellow;
+  background-color: rgb(228, 250, 210);
   font-size: 20px;
   padding: 0;
 }
@@ -14,13 +14,13 @@ p {
   box-sizing: border-box;
   max-width: 1024px;
   margin: 0 auto;
-  background-color: linen;
+  background-color: rgb(230, 250, 237);
 }
 
 header {
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
-  background-color: #fde4cf;
+  background-color: #fdcfee;
   min-height: 400px;
 }
 
